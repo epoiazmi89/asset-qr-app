@@ -10,159 +10,167 @@
     --brand:#0f4c81; --brand2:#1f7bb6; --ok:#0b7a35; --warn:#b26a00; --danger:#b91c1c;
   }
   * { box-sizing:border-box; }
-  body {
-    margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text);
-  }
+  body { margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text); }
   header {
     background:linear-gradient(135deg,var(--brand),var(--brand2));
-    color:#fff; padding:18px 16px;
-    position:sticky; top:0; z-index:20; box-shadow:0 4px 18px rgba(0,0,0,.12);
+    color:#fff; padding:18px 16px; position:sticky; top:0; z-index:20; box-shadow:0 4px 18px rgba(0,0,0,.12);
   }
   header h1 { margin:0; font-size:20px; }
-  header .sub { font-size:12px; opacity:.9; margin-top:4px; }
-  .wrap { max-width:1200px; margin:0 auto; padding:16px; }
-  .toolbar {
-    display:grid; grid-template-columns:1.6fr 1fr 1fr auto; gap:10px; margin-bottom:14px;
-  }
+  header .sub { font-size:12px; opacity:.92; margin-top:4px; }
+  .wrap { max-width:1100px; margin:0 auto; padding:16px; }
+  .topgrid { display:grid; grid-template-columns:1fr; gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 4px 14px rgba(15,76,129,.06); }
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .stat { background:#f9fbff; border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .stat .k { font-size:12px; color:var(--muted); }
+  .stat .v { font-size:22px; font-weight:700; margin-top:6px; }
+  .toolbar { display:grid; grid-template-columns:1.3fr auto auto auto auto; gap:10px; align-items:center; }
   input, select, button, textarea {
-    width:100%; border:1px solid var(--line); border-radius:12px; padding:11px 12px; font-size:14px; background:#fff;
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid #c9d5e6;
+    font:inherit; background:#fff;
   }
-  button {
-    cursor:pointer; background:var(--brand); color:#fff; border:none; font-weight:600;
-  }
-  button.secondary { background:#fff; color:var(--brand); border:1px solid var(--brand); }
-  button.warn { background:#a16207; }
-  button.danger { background:var(--danger); }
-  .grid {
-    display:grid; grid-template-columns:1.3fr .8fr; gap:16px;
-  }
-  .panel {
-    background:var(--card); border:1px solid var(--line); border-radius:18px; padding:14px; box-shadow:0 10px 24px rgba(15,76,129,.06);
-  }
-  .panel h2 { margin:0 0 10px; font-size:16px; }
-  .stats {
-    display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px;
-  }
-  .stat {
-    background:var(--card); border:1px solid var(--line); border-radius:16px; padding:12px;
-  }
-  .stat .n { font-size:22px; font-weight:700; color:var(--brand); }
-  .stat .l { font-size:12px; color:var(--muted); }
-  .list {
-    display:grid; gap:10px; max-height:70vh; overflow:auto; padding-right:2px;
-  }
-  .asset-card {
-    display:grid; grid-template-columns:88px 1fr auto; gap:12px; align-items:center;
-    border:1px solid var(--line); border-radius:16px; padding:10px; background:#fff;
-  }
-  .asset-card img { width:78px; height:78px; border:1px solid var(--line); border-radius:10px; background:#fff; }
-  .title { font-weight:700; margin-bottom:4px; }
+  button { cursor:pointer; font-weight:600; }
+  .btn-primary { background:var(--brand); color:#fff; border-color:var(--brand); }
+  .btn-secondary { background:#eef5ff; color:var(--brand); border-color:#cfe0fb; }
+  .btn-danger { background:#fff3f3; color:var(--danger); border-color:#f1c4c4; }
+  .btn-ok { background:#edf9f1; color:var(--ok); border-color:#c7ead1; }
   .muted { color:var(--muted); font-size:12px; }
-  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-  .chip {
-    font-size:11px; padding:4px 8px; border-radius:999px; background:#eef4fb; color:var(--brand);
-    border:1px solid #d6e5f7;
-  }
-  .status-good { color:var(--ok); font-weight:700; }
-  .status-empty { color:var(--warn); font-weight:700; }
-  .detail-head {
-    display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;
-  }
-  .detail-grid {
-    display:grid; grid-template-columns:1fr 1fr; gap:10px;
-  }
-  .field {
-    border:1px solid var(--line); border-radius:14px; padding:10px; background:#fbfdff;
-  }
-  .field .k { font-size:11px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.4px; }
-  .field .v { font-size:14px; word-break:break-word; }
-  .detail-qr {
-    text-align:center; border:1px dashed var(--line); border-radius:16px; padding:12px; margin-bottom:12px;
-  }
-  .detail-qr img { width:180px; max-width:100%; background:#fff; border-radius:10px; border:1px solid var(--line); }
-  .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
-  video, canvas { width:100%; border-radius:16px; background:#000; }
-  .scanner-note { font-size:12px; color:var(--muted); margin-top:8px; }
-  .empty { text-align:center; color:var(--muted); padding:24px 10px; }
-  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .full { grid-column:1 / -1; }
-  .footer-note { font-size:12px; color:var(--muted); margin-top:12px; line-height:1.5; }
-  .mini { font-size:12px; }
+  .detail-grid { display:grid; grid-template-columns:1.2fr .8fr; gap:14px; }
+  .kv { display:grid; grid-template-columns:220px 1fr; gap:8px 12px; align-items:start; }
+  .kv div { padding:8px 0; border-bottom:1px dashed #e5eaf2; }
+  .kv .k { color:var(--muted); font-weight:600; }
+  .edit-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  textarea { min-height:94px; resize:vertical; }
+  .qrbox { text-align:center; }
+  .qrbox img { width:180px; height:180px; border:1px solid var(--line); border-radius:12px; background:#fff; padding:8px; }
+  .scanner-box video { width:100%; max-width:420px; border-radius:12px; border:1px solid var(--line); background:#000; }
+  .note { background:#fff8e8; border:1px solid #f4dfad; color:#7a5a00; border-radius:10px; padding:10px 12px; font-size:12px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; }
+  .row > * { flex:1; }
+  .footer-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
   .hidden { display:none !important; }
-  @media (max-width: 900px) {
-    .toolbar, .grid, .stats, .detail-grid, .form-grid { grid-template-columns:1fr; }
-    .asset-card { grid-template-columns:74px 1fr; }
-    .asset-card > div:last-child { grid-column:1 / -1; }
-    .list { max-height:none; }
+  @media (max-width: 860px) {
+    .stats { grid-template-columns:1fr 1fr; }
+    .toolbar { grid-template-columns:1fr 1fr; }
+    .detail-grid { grid-template-columns:1fr; }
+    .edit-grid { grid-template-columns:1fr; }
+    .kv { grid-template-columns:1fr; gap:0; }
   }
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap" style="padding:0;">
+  <div class="wrap">
     <h1>Asset QR Register</h1>
-    <div class="sub">Built from uploaded Excel asset list • Scan QR with phone camera inside this app • Edit condition and remarks with local save</div>
+    <div class="sub">Scan QR, view asset details, update condition, and export an Excel file with printable QR labels.</div>
   </div>
 </header>
 
-<div class="wrap">
-  <div class="stats">
-    <div class="stat"><div class="n" id="statTotal">0</div><div class="l">Total Assets</div></div>
-    <div class="stat"><div class="n" id="statStatus">0</div><div class="l">Assets With Status</div></div>
-    <div class="stat"><div class="n" id="statEdited">0</div><div class="l">Edited in App</div></div>
-    <div class="stat"><div class="n" id="statZone">-</div><div class="l">Main Zone</div></div>
+<div class="wrap topgrid">
+  <div class="card">
+    <div class="stats">
+      <div class="stat"><div class="k">Total Assets</div><div class="v" id="statTotal">0</div></div>
+      <div class="stat"><div class="k">Edited Items</div><div class="v" id="statEdited">0</div></div>
+      <div class="stat"><div class="k">Top Zone</div><div class="v" id="statZone">-</div></div>
+      <div class="stat"><div class="k">Assets with Status</div><div class="v" id="statStatus">0</div></div>
+    </div>
   </div>
 
-  <div class="toolbar">
-    <input id="searchInput" placeholder="Search asset tag, equipment, building, serial no..." />
-    <select id="zoneFilter"><option value="">All Zones</option></select>
-    <select id="statusFilter">
-      <option value="">All Status</option>
-      <option value="__blank__">Blank Status</option>
-    </select>
-    <button id="btnExport">Export Edits</button>
+  <div class="card">
+    <div class="toolbar">
+      <div>
+        <input id="assetSearch" list="assetOptions" placeholder="Search asset tag / building / trade / equipment" />
+        <datalist id="assetOptions"></datalist>
+      </div>
+      <button class="btn-primary" id="openAssetBtn">Open Asset</button>
+      <button class="btn-secondary" id="exportExcelBtn">Export QR Excel</button>
+      <button class="btn-secondary" id="exportCsvBtn">Export Edit CSV</button>
+      <button class="btn-danger" id="clearEditsBtn">Clear Saved Edits</button>
+    </div>
+    <div class="muted" style="margin-top:8px;">
+      Asset list is removed from the page. Use search or QR scan to open an asset. Export QR Excel to get a printable label list with QR for every asset.
+    </div>
   </div>
 
-  <div class="grid">
-    <div class="panel">
-      <h2>Asset List</h2>
-      <div class="list" id="assetList"></div>
+  <div class="detail-grid">
+    <div class="card">
+      <h2 style="margin-top:0;">Asset Detail</h2>
+      <div id="detailEmpty" class="muted">Search an asset or scan a QR code to open the asset record.</div>
+      <div id="detailArea" class="hidden">
+        <div class="detail-grid" style="grid-template-columns:1.4fr .8fr;">
+          <div class="kv" id="detailKv"></div>
+          <div class="qrbox">
+            <img id="detailQr" alt="Asset QR" />
+            <div style="margin-top:8px;font-weight:700;" id="detailTag">-</div>
+            <div class="muted">QR stores the Asset Tag value</div>
+          </div>
+        </div>
+
+        <h3 style="margin-top:18px;">Update Asset Condition</h3>
+        <div class="edit-grid">
+          <div>
+            <label class="muted">Condition</label>
+            <select id="fieldCondition">
+              <option value="">-- Select --</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Needs Repair</option>
+              <option>Damaged</option>
+              <option>Missing</option>
+            </select>
+          </div>
+          <div>
+            <label class="muted">Status</label>
+            <input id="fieldStatus" placeholder="Example: Active / In Use / Store" />
+          </div>
+          <div>
+            <label class="muted">Service Done</label>
+            <input id="fieldServiceDone" placeholder="Example: Yes / No / 12-Apr-2026" />
+          </div>
+          <div>
+            <label class="muted">Last Updated</label>
+            <input id="fieldLastUpdated" placeholder="Auto filled when Save is clicked" />
+          </div>
+          <div style="grid-column:1 / -1;">
+            <label class="muted">Remark</label>
+            <textarea id="fieldRemark" placeholder="Write latest asset condition or inspection note here"></textarea>
+          </div>
+        </div>
+        <div class="footer-actions">
+          <button class="btn-ok" id="saveAssetBtn">Save Asset Update</button>
+        </div>
+      </div>
     </div>
 
-    <div style="display:grid; gap:16px;">
-      <div class="panel" id="detailPanel">
-        <h2>Asset Detail</h2>
-        <div id="detailContent" class="empty">Select an asset from the list or scan QR.</div>
+    <div class="card">
+      <h2 style="margin-top:0;">QR Scanner</h2>
+      <div class="scanner-box">
+        <video id="video" autoplay playsinline muted></video>
       </div>
-
-      <div class="panel">
-        <h2>QR Scanner</h2>
-        <video id="video" playsinline muted class="hidden"></video>
-        <canvas id="scanCanvas" class="hidden"></canvas>
-        <div class="actions">
-          <button id="startScanBtn">Start Camera Scan</button>
-          <button id="stopScanBtn" class="secondary">Stop</button>
-        </div>
-        <div class="scanner-note">
-          Best on Chrome/Edge mobile. If browser blocks camera, allow camera permission and run from HTTPS or localhost.
-        </div>
-        <div class="footer-note" id="scanResultNote">
-          QR in this app stores the asset tag. After scan, the asset detail page opens inside this app.
-        </div>
+      <div class="footer-actions">
+        <button class="btn-primary" id="startScanBtn">Start Camera Scan</button>
+        <button class="btn-danger" id="stopScanBtn">Stop</button>
       </div>
+      <div class="note" style="margin-top:12px;">
+        Camera access usually works when this page is opened from HTTPS or localhost. Scan result will open the matching asset detail automatically.
+      </div>
+      <div class="muted" style="margin-top:10px;" id="scanNote">Ready to scan.</div>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 <script>
 const RAW_ASSETS = [{"No.": 1, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Substructure, Piling", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SUBPIL-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nMWVMW5EQQhDH6vtzQ3+/Y/1b2BO4BS7RbJVBikKHRLGYBimwnebBz/t7/2q6pnqrqpe4JXQZKzknP8JJUypKa37ucAn8R9+E3qFf0LozNzqcK5fpUAADOg+x7+xHVjsT6WB+wLct47xRFZCgERe6CcaxuoiC36bKLKs5Jj/AaLvATS9mj+6GwDTx/MjimRLGM7rJwYnILLon8gRRK9k5/gkkYPCgv+1/7dGDbDSLwqxIq/mX02rNfXL+E9+JIPDRr/3/bGuirO5v8TkGuCaTf2A5EDQ+futf/6/vgAVdoNc+gDGzAAAAABJRU5ErkJggg=="}, {"No.": 2, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Substructure, Work Below Lowest Floor Finish", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SUBWOR-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4UlEQVR4nL2VQWpEMQxDn4fZyzfo/Y+VG8gnUBd/0xkozDe03gSDhSzHUSr8jHnwGn+fV1VXdXVV9QKvhOjISu7zP6FEn69pSls9B/CN+hd+QD30Cv+AmD6Kie/jKwUCYEDnLp4kSSxd5/3+u6nhTA99//4JjmML2brNT0wQujQs8MjGRMIbfGQhAmIzPwYLIZzV/BAJkI3+J2HoEcP5rN93fkmWgS0/NAj3WfGDRCzBZn+UyHEUFvt/+Y8KT31S/0suyVJv9Atd2+cs3s/lPy7B0j+nitYRqDb+9ZL++//1DcurgElQhq80AAAAAElFTkSuQmCC"}, {"No.": 3, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Frame", "Equipment Name": "Frame", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-FRAME-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1ElEQVR4nMWVwW0EMAgEh1P+Swfpv6zrYKlg8/BFuuRnpCjID5A8AmO8rvBu8+Cn/X1cVV1dRVX1glcChuPc8h9QgkbH2Z0naPpi/++4nmNv+Ri3PyG+5ysFAmBAz1uevExJEt/zMuf+IrTgo9cybPInyNFxr/kH0zGNwvT9/BID2BJa1U+USJF2/QckRc4m/wNFhqJn2JxfEkIGrepPEpwo0mZ+ACGQNvNz9EdjY7zVnzGaYq0/qJG16P+JPZ5nU/f5+X57Cbv+TRV91GdRf/3z//UFvdOKcBTuEjIAAAAASUVORK5CYII="}, {"No.": 4, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Upper Floor", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SUPUPP-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVQWpEMQxDn4fu5RvM/Y/1byCfQF18GDrQRZ1SmpUNVhw5UlLh65oH7+vv86rqobqrqtd4okRId+At/gNKWKWm9Bs+Xta/+gMt0af40CmsDvv5VQoEwICu/fyTxK9gP7/ubhQ1PXv+xLJFwCf3T0xAtmP25yeyLGI44U/syJEFOsFHNsaSfcJfESBhjvhbsQI65K9EcnRvttePb+uNQvb6ufV/adQAa/0/UAKjwVw+eT+qeao19cP6b/JrZuLpE/8ICSTiA/88IMYZ4HnkX+7mELTvX//8f30CCnOOAvdOWm8AAAAASUVORK5CYII="}, {"No.": 5, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Roof", "Equipment Name": "Roof Frame", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-ROOFRA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nMWVsY1DMQxDn4LrqQ3+/mN5A3oCXvFTJECKWMDhVBhQQZAUBbnCa+0H7/X3fVV1001V9QCvhNUYJef8P1CCxb4ojfDAtdPf6v3U72w8xcdoA8Tn+EqBbhGgdYonSaIEJYnP9Tdd7K1VxXn+BNuKAvicn9hBskKkAR4c5Sli4F9RbRrYnuzfbgK+7gU65w8u0ILuyfzjOBGOBv4JSGAxzC9JiKLIs/yQns8sv7Bs3xbO+YWECGjED2DcDjrP775fQuuCpeP7T5TIkWwxn7+xyTm+/vn/+gUXqYyqN2pxfgAAAABJRU5ErkJggg=="}, {"No.": 6, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Roof", "Equipment Name": "Roof Finishes", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-ROOFIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nL2VwW1DQQhEH5bvQwe//7LcwVDB5PBziH3KIiWcQGIW3q5gK/y0efBufx9XVcN0V1Uf64kSgW7Hp/onlLBKTWnN0+CT/I/4GtEr/Y0d4x1/pUAADOh1rv+W9u2c83d3C6np2fAT4gh5+f7t8oyhyHH/RJFFLCc5rv+A4Ro3ML3htxyDET7nJzKyJcmc908cOQKsBT9RLN8nrOonCQ4Kq/uvqrYmtPp8/zxQAqXBvLyZ/2paralf5r/ZEwDTk351lvun0VUmG35iogGu3fyC5EDQZn+9hf/+f30BmCuGtydHiXgAAAAASUVORK5CYII="}, {"No.": 7, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Stairs", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SUPSTA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3UlEQVR4nMWVsW0FMQxDn4LrqQ3+/mPdBtQETHG/yE9nAUHUGAJMkJIlusLPmC8+4+/zquqB6qrqBV4JrxpZyUpPNRNuqN7Wo3rRB/d/5xZ4hb8g9NwCwnn/KgUCYED3OR6geetfzE8/8Ht66rx+AkSQCOJzfpsauwt5wx/HxFFsHfMTBDYhWui/ANzK+ynO+ZVgyyE+5396LycWbOoXEY5BK/4kkZCiXf9BJtZK/+M/Sgmz8J8LSoxUFJWl/6otkpzv//Uc0/ezhqv5URwE2ezfVNEaYS38v/75//oGs/iA5Fy5ESwAAAAASUVORK5CYII="}, {"No.": 8, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, External Walls", "Equipment Name": "Brickwalls", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-BRICKW-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nMWVzW1EQQiDP1Z7Nx2k/7JeB6YC5/ASKT+XHaQonEAaCxuQp8LXmAff4+/rqurp6a6qPsYTJQLdiRd8qrFGTfVaj8En73/UPaK3+Jgwl4nP8ZUCATCg63z+SWJ9Jqf4Jw0Y0e5Li/07OBKKFvsnYGE7gXP+D2SuSDTK+fyJJYhM0Hl/EmQZK/ZGv5CCJDb6iYWVm8oGrxgTseyfJBAUFv1v/3EmtHrrP3GsyJv7p0QJT+klvr/wQKYnQ2fpP4Xeis65/g//0YA0m/sHBPcKz++3/vn/egeKgZA/oV9IPQAAAABJRU5ErkJggg=="}, {"No.": 9, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Windows", "Equipment Name": "Casement Window", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": "930mm x 1100mm", "Type": "Aluminium", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-CASWIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2ElEQVR4nMWVwW1DMQxDH4vcqQ26/1jZgJ6APfwAbY9fQBAdDBswIYqWaJW/cb74H+8/SxoxGkmzwLsF0rhd8dHg4QyabT05c+v+bzwAEFFniS8TpkO5r58qMAAH/LyLp22bptfmvn5zpDkcMYv3p4lbpyncz09DcCn2ij+lKPQ8Z8O/lPq1LPjbJI290p8CNsR0l5/EtAW8wafkQi/4qwACk4FF/wImjb3h//Ifzzdh4T8PkIED4mTpv6am9v3+u/wnw+lBXvTvNX0l7Obvoh87XuivD/9fP2ydjfDmz++nAAAAAElFTkSuQmCC"}, {"No.": 10, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Windows", "Equipment Name": "Louvres Window", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": "1191mm x 547mm", "Type": "Aluminium", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-LOUWIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2UlEQVR4nMWVMW5EMQhEH6vthxvs/Y/1bzCcYFL8FNmtYqQoNDYST3jAxhV+2jx4t7/3q6pnpruq+pgnSqTo3viUf0IJ96gprfUM+CT+wy9Cb/mYqC4Tn/OVAgEwoOuc/14JrO5Pd/cgNT3n5ydAcJC16D8By8ExZMErOJGV5Jx/MOUugJne6I+wjcHe6NddO4mdfiM7gLXQT+QIIpb5k9wawio/oMiRpFX9EplYkTf9p5qXWlO/jH+zJwAuJj2d7fyxXnWR8/l7zx+/BqTt+xUOhEX965//ry9Sm43b+QZ3GAAAAABJRU5ErkJggg=="}, {"No.": 11, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Kitchen", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Windows", "Equipment Name": "Casement Window", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": "930mm x 1100mm", "Type": "Aluminium", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-CASWIN-2026-02", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA20lEQVR4nMWVQWoEMQwES8veSz/I/581P5Bf0DmEQJYkMDaE+CbodrmFbFf4utaD1/X3dVV1F9VV1Qd+Ey7KMdnnP6GkZTXlaZ6AO/oXPsBFe+oPXenQYb9/lfo8+wKvfT/AeoOBg/khGobBic6+n8zMIM6c+SGTDJpt/xOWF0167ui/80dNCJF9PgkJGjFH+T82gcP86TUs4bqj/4EvkDnkP8gkNhquIz4oGYWT/pk4mRhyND8lFLPqjv6XOjqmT/KLKhgP7s8DMswS1jp6P1cV5SVY+/765//rHX1AeqWlPGZLAAAAAElFTkSuQmCC"}, {"No.": 12, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Bathroom", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Windows", "Equipment Name": "Top Hung", "Equip ID": null, "Quantity": 3, "Location No.": null, "Capacity/rating/type": "393 x 374mm", "Type": "Aluminium", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-TOPHUN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA30lEQVR4nMWVsW0FQQhEH1/Ohw6u/7Kug6GCcXAObMuBF8kyGRIPlgGxFT7bvPhqf+9XVdPVXVW94JXQ1ljJef03KHHPqCmt+xH4JP6bf5XoFU+UKOAokU/5SoEAGNB9zn+wHVjsT6UBl8B9a7F/N3O3GUDn+0PsyMEx5Fg/ImxJhuScf4GvxiBPb+bvKBiDfT5/IpAsEa/6txMCaNM/kSU5epKd80kiB4VVfUCRI0kr/RLZsSKf13/uzwWe0i/if5qfZHDY6Pf4ja6Ks7m/xDgDXLN5PyAcCAv965//r3dL3pDOfNHPlwAAAABJRU5ErkJggg=="}, {"No.": 13, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Windows", "Equipment Name": "Casement Window", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": "930mm x 1100mm", "Type": "Aluminium", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-CASWIN-2026-03", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nL2VsW0FMQxDn4LfUxvc/mPdBtQETHFNfpAiFpCoMgHJMinarvA15oP3+HtcVc1Ud1X1ol4JrYyVnPd/QYl7UFNa8+nD/G+4dS3rXxA6A+pwrl+lQAAM6D6tJ0kS/Cx83r8B0+C+dew/grEcRKLj/sRIjh3B+flJiCHWiv8Hk7pMw1Sfz59YOMYIn/Ov9AjuCxiy0N+yLR4nLPSTUBw9m+38B0FhpX9VdTKh1dv3h9Jgbm/ufzWV1tQv83/AmZlw9/r9QVe5s+FPjDUgzca/gMQzwo1/3+C//1+fxCqM3Y+Pd84AAAAASUVORK5CYII="}, {"No.": 14, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Windows", "Equipment Name": "Casement Window", "Equip ID": null, "Quantity": 6, "Location No.": null, "Capacity/rating/type": "400mm x 1848mm", "Type": "Aluminium", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-CASWIN-2026-04", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2klEQVR4nMWVMW4FQQhDH1F6c4O9/7H2Bp4TOMX+IolSBKQoTAMSHoMHMRU+23njq/19XFV9qO6q6jGeKBHK43iKf4cS5qgpbfuROB7kf4+rRW/xMT7HJp7jKwUC4IDuuf5JYvxy5vwNmAb3rfH8EUUJQWzen8ghsiOY109sOcRa9U8UQLKMNviY5wjv+jdY0rZ/JRLPJKz4hYmey3bzJweFFT+gyJGklX6J7FiR5/zP/rnAp/SL/B/wwE2f1N1Z7p9GV7kz37+v/XMdkM68/kd/EQgL/euf/68PiyKc2bAHZYoAAAAASUVORK5CYII="}, {"No.": 15, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Internal Walls & Partition", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SUPINT-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nL2VvW1DQQyDPxnuqQ2y/1hvA2oCpnhNHLjwCUhUHQEREvV3FX7aPHi1v8dV1d1UV1Uv+Eq4rpGVnMd/QolG05S2eizjA//fWC56y4/pUkx8zq8UCIABXad8kiRWdD/O8++muGZ66PP+E5tICGMdxycxoCSRzvMnlhM5kr3ho8ghSGz4EZYUnJzrr5RVoRDg4/1/EkhZ4PnA/43+IMnApv4PQjwghWsVn7vyEmzmR4ksR2E1/1TD1TP1of87/CU56o1+IRGQs9if+/5kBMv7OVW0LoFqc79e4L//X98wRIoqykJCaQAAAABJRU5ErkJggg=="}, {"No.": 16, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Door", "Equipment Name": "Door", "Equip ID": null, "Quantity": 3, "Location No.": null, "Capacity/rating/type": "967mm x 2100mm", "Type": "Steel", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-DOOR-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA0klEQVR4nMWVsW1EMQxDnw7X0xvc/mP9DfgneCmuSdKdgCCqLMCEKFqUR77H/eBn/H0+M+cww8ycBT7KPUB0xWcOoYE5236u5D4f3P+dvzrtCv8EOZ2+QD7XbxwIADfk+hSPqjV5Hz7Hp5AAhizwJLZGYFPfBhWbFf8mNiY2G/5togVd8adWY9nxh1Al3dR/ECoMF/di/jAtaWTJX5VqzEp/IEgSFvP33j+ZXpR2498JN3AP2e6P5ESz0P8JwAU3J5PN+2kEy85/QFIKG//PP/9fXykZkh+D1O4QAAAAAElFTkSuQmCC"}, {"No.": 17, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Door", "Equipment Name": "Door", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": "916mm x 2100mm", "Type": "Waterproof Door", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-DOOR-2026-02", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA20lEQVR4nMWVsW1EMQxDn4LfUxvc/mPdBtQETOEUOSBFvoDDqbFVPIiWZbrC75gvXuP9eVV1TxVV1QteCbQ5m7v8BSWGFpRWPJBm+p96/+ILo17yodM8INzvX6VAAAzoeZ8/izAs5ofIgA0R8n3eyHIkIAseR7YUKxveJHGkWCv9iYIh2ek/5WM2+i+ABpesyu35IZKsgO3F/V0AD0YulM38JIlIFK36D4ggiYX+4z8aPzH2xg+roWGKhf+cfNRKtHj/P/41DK3Spn4MtGDYnH+qKJhmo78+/H99A+WBfaHVZTyUAAAAAElFTkSuQmCC"}, {"No.": 18, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Door", "Equipment Name": "Swing Glass Door", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": "2079mm x 2400mm 6 mm thick", "Type": "Aluminium Natural Anodised Frame", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SWIGLA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA40lEQVR4nMWVQYpDMQxDn8vfyzfo/Y+VG8gn0CxahhnoogmUehWDhWwrUSr8jbnxPz6fV1VT1V1VfYBXQkljJUf9VGOWmurjeRZ4p/43LgAa0Uf4G8SYtUy8j68UCIABrV08SZLoefA+fwOGxr20ff+IUaSAFG3zkyAUO4H9/kmCo1jRwfzEz84J2sdfIBYzaFh9oJ8iGQmfzH+xxnQKkTfqX/EjHMHp/hMICgf7f/iPNaHV+/5DlCjEinzCTzWV1tSb9S/yzEyYPsUXulecE/8lxhrgPif6AxIPCfffb335//oBm8yNtWim5ZQAAAAASUVORK5CYII="}, {"No.": 19, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Superstructure, Door, Ironmongries", "Equipment Name": "Ironmongries", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-IRONMO-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVsW1EMQxDnw7Xkxvc/mP9DegJmOKnyF0VGwiiSgJEi5QgecpPWw/e7e/jmfFi2TPjbTxVK9LbyS7+CSNiZEbHehqyk/8RG+FTfEM8V2j28dMBAbBA1z7+hprb2edv20IyXvv8aUkqIU7mP13IFwCm2/wpVUijtN2u/6BcDmaxfKI/tIIIsq+fKlEjqbDPnyaEgtCBfqpUobofO5h/W6WoHNUHVKWSdNS/VkmjKifzZ8xL1ppf5r/ZE4AMq8vu4f0Z9Bro/v39vj9dIB3tLyClUA76P//8f30BFlyLRwoMkwEAAAAASUVORK5CYII="}, {"No.": 20, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Finishes, Internal Wall Finishes", "Equipment Name": "Wall Finishes", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-WALFIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1UlEQVR4nMWVu20EQQxDH43NqQ6u/7KuA04FdLCJDVyyAgwrGgUPIvThqPyM88Xv+Ptc0ojRSJoF7xaUxu1KjwbMGTTP+QuAPKn3IX8Nky3f8C4dmue8KjAAB/x+ytO2jdP78Zx3gCTUeMPbLWkNm/opdijs9DcuTQve6AfcUuKF/gufMGRsFvtPMQRid9U/Q0tbWMzvgmooAmfjP6HhyC7z3D/u/pvG3ui//ed0XmTT/wtkzAFxsvXfqUm98U+AMKdGm/1x67SE3f0BxrGzuX/98//1DT9aijYnAGldAAAAAElFTkSuQmCC"}, {"No.": 21, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Finishes, Internal Floor Finishes", "Equipment Name": "Floor Finishes", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-FLOFIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA5UlEQVR4nL2VyW0FMQxDHz/+nepg+i9rOqArYA5zyXKJDSQ6SYAIi9Rilc+2Xny1v48lzVprRtJs46lbu32c7OLfIBPFg3zKZxmykf89vriYI/wbytyAp+zrpwoMwALf+/q3bZ3H2db/xcwM2MOsff7UTWhxTvqvIrwCMHR7/mmT4sY547+uUe4BNCf8mzQQSPb5U7sQ24T9+tWFAUE5uh8XaKlG0hH/tqa4HOkvaW6vMp7T+9M0rrP//nN/ZLLkX9X7Aw9kWJ17elI/Nnnavz8/L2jItcA+2l/ATqH4aH8/27//Xx/eUIun7kUDzgAAAABJRU5ErkJggg=="}, {"No.": 22, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Finishes, Internal Ceiling Finishes", "Equipment Name": "Ceiling Finishes", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-CEIFIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2klEQVR4nMWVQY5DMQhDH1+zNzfo/Y/1b+CcwF2kqtrdBGk0rIgEAtvIqfAZ6+I7/v5dVb3W6q6qPu4nSoSyEw/2qSaUmuoxntv4pP4dPwBUmp72h3bfqMM5f5UCAbBA9zn/SWL5lQz0kxRLijzpT2RLIA30JyABtmA2nxhZ0QD/RVdaAlh9rv+ejzGyJ/glb/6Z4bcUZ28y0j+SHDGcnyRyUBjNBxQ5kjTiL5Edz+53+0+rteqX9V+x/SPFSt2doX+V9Sh3zv3jghhrgbQm9wsIAmHAf/3z//UEzDWVFYA5VD8AAAAASUVORK5CYII="}, {"No.": 23, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "Finishes, Extenal Finishes", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-FINEXT-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3UlEQVR4nL2VMW4EMAgEhyj9+gf3/2f5B8sLNoWvyOlSxEgJjY3ECLBgXeG79Qev9vd+Va1a1KqqNeCVYEpWcp//E0o8UC9K03424Iv4N783a8rHLCsmvucrBTo1gPYtT5LEkc7lnpdCDHKkAR+IsYQ94YnBSpAm9dvxs3hPeIwiooQJHxGiIGXYvwiIDPqvnBkSbdC1fhBAip/H/fwnMQsp7Pv5P/khluD+/Y7+JC1MPNnfWtCru34Z/4PfkuysSf9CkkDRYH+O/uwt6B7pZ1fxeGyBaqJfL+6//19feL2N7IFQWw8AAAAASUVORK5CYII="}, {"No.": 24, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, Site Work", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-EXTWOR-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA10lEQVR4nMWVsW1EMQxDn4LrqQ2y/1jegJqAV/wmSWcBwbmxBZggaUh0hZ9rvvi9/r+uqqa7uqp6gVdCeWQl9/wvKMFwnsPSz3fom/t/6rjxFh8zhSC+x1cKBMCAzi2eJAmJkiS+19/Q6j7TU/f6CSjEic09P4kgQihe6ndj6wz3/UuCEOSxsfAvx0lkLd6fyGDkRAv/RNgmsUAbfIyIYcf/9B9S5A0/IDvWSv+TP6iE2ecPKorKMn/VFlbu++/1bNMH3Jv5U6IQBKv5nyo6I6xF/teH/683Yf6Qyfi3ewMAAAAASUVORK5CYII="}, {"No.": 25, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, Road Work", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-EXTWOR-2026-02", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1UlEQVR4nL2VQWoEMAwDx0vvyg/y/2flB/IL1MNS6LI9NIbWN4EHW0E4Fb5XP3itv9dVtaqpVVVrwCvBq2Ul9/M/oMRGvShN/RzQTf+7rh7zMcuKie/5Sn3t3qBzzwP0BsMgP0QKEciRfM9btkACT3gRoiRIGfCBxETYE96KZILCaL4VSxHKxD/2MwHOzL8wlsjMPwbJMHr/B1HyhDn3+efJEkswyk8ix1HIZH9qQa/u+mX/T3pLJmvKb7p21pncX2JOC7pH97Or2DoC1eR+vch//78+AdGxhUScMIFKAAAAAElFTkSuQmCC"}, {"No.": 26, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, Drainage", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-EXTWOR-2026-03", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nL2VwW0FMQhEH6vchw7Sf1m/A1zBy2EjJf+4SAkXM5JHYgCPS37HuXiPv8dV1d1dXVX9mI/RzJA7WdRTTZPTVG/1TD+7/xMf9zH0jn+BQxMH5zm/LAgAB/J63n/VibmTxfwiOmTMZn5DSxO6Xs/144wYlWRVv04cw8yG70hAIs/5F4DHkNNu3g8OBhgX+ktKinA85LF/IAYzsOr/hYwNiazmD4RxEni+f9/+k/Fe4wWfRBjY8G98kgz2Rn9IEGJm5Z8OnsA52fjXqaI/X4HUxr/e4L//X1+rzJKe9TZHNgAAAABJRU5ErkJggg=="}, {"No.": 27, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, Ancillary Buildings", "Equipment Name": "Waste Chamber", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-WASCHA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3UlEQVR4nL2VzW1DMQyDPwa50xtk/7HeBvQE7OFdmqCHWkCrkwmIkKg/q3y3/eDd/h5LWgItSWvAd0uQ4/Y8/hNkVrwX8lRPXiEH/p/YW6wpv2HFDc05XxUYgA2+Tvm0bZP6fpzz7dKCU/uY/2CjSpil61w/pcZ243qSf9qkKU1G+mOaO49RfDe167Tn9VNluHxPQY73n9bUsWGmH+I0gAf1f1KIisma9R8MjQ2T+XNLuk1oJvurBXvtrV/6/4RfdvCa6Dc29/5lop+GbsPwfm4J+TJYk/v1Bv/9//oCQeGNnOfxdw0AAAAASUVORK5CYII="}, {"No.": 28, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, Ancillary Buildings", "Equipment Name": "Mailbox", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-MAILBO-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2UlEQVR4nMWVQWpEQQhEXw2zL2/w73+sfwM9QWWRBCYki7QQ4krBR5ci1QqvMQ++xt/XkqqESlIteCc043Zy/v4TZMQ1hbydJ276oP97PdSKf0Io4VDhfH+KwB8S8H3KkyRp7PfknLdDG9yxF3w7wRjoDc+n+LY3+mMaE5re8O3GEDArHidxnGQ3v90GvJlfYYAyA+2FfwgK3wO+NvcfiDKm6z7nCWB32obN/pw47jgs7v8BKmZqRr/s/6mO3bi2/FWjK9wb/yXNPYaZlX+OROU2WOe8/vn/egMph4OxhlIHiQAAAABJRU5ErkJggg=="}, {"No.": 29, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, External Services", "Equipment Name": "Gate & Fencing", "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-GAT&-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVwWkFQQxDn5e9yx1M/2VtB5oKlMNCyL9lDCE6ecDCMjKaCj+xLz7x9++q6l1FV1UP+EpYgJWM9FSzyYbq8T6qddT/jRsAo57xL4hhFW9xyq8UCIANek75JElATpL4XH9Do4fqXef6CVEsowgdzyeKiQTOiI9kJCF8vj+RjBwJZvNDkAj2Of9CTRt7o1/1f+KGB5Z724UG/snCwqCc678xpknLNdD/5s9DQdOT+1OiOFI0uv83f3h2Mco/AFYtwNP8EiY8a+R/6O0y6pzrJ4BkItC5//XP/9cXpMJyCF41ip0AAAAASUVORK5CYII="}, {"No.": 30, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": null, "Trade": "Building and Civil Services", "Equipment Group": "External Works, Recreational Facilities", "Equipment Name": null, "Equip ID": null, "Quantity": null, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-EXTWOR-2026-04", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nL2VMW5DMQxDH4Ps1A1y/2PlBvQJ2CEZGqBDv4DWi6HhQTRNyyrf17nxuf6+ljTSaCTNgneLSeN2pUfD6ZxBc52/A9DJ7/v9wIshs+Fv0NCSobnOqwIDcMDPqzxt2/q95zrvgJNQ48u8qoDnlMP0cn7vMFUIA4v8qOfxhKEHHiz8I3VNcVn518aNvfSfYiCOd/1DnDZmcX/UhLiAF/pVAIHJsPIfDI1X+t/zp/Mgm/xQY/Oawrl+/ldtamJv5idAZk5BK/2t0xJY5QewHTu79/9R/vv/9QXcfIxP6Z6S3QAAAABJRU5ErkJggg=="}, {"No.": 31, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Squat Toilet", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": null, "Type": "Ceramic", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SQUTOI-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nMWVwW1EQQhDH6u9mw62/7J+B6YC5/AjZSPlkEGKwgkkzICxmArvNg++29/HVdXT011VfYwnSgS5HS/6qcYpNdXbeQT4IP/LngAUorf40KkLdTjnr1J3+zCg65z/JDH+dBb7kxRLirzB244IWIv9P6HRuAxTOdY/iQmO0Wb+B0Na3Wg2+iPGjjHC5/MTGWQJwYp/YQXk7f5NHN3FdvqTg8LqfUCRI0kr/hKZeKff+/680pr6Zf4P8TUz8fQW3+hVcs7vx+NWoAZ4zUa/gORAWPBf//x/fQCadpc7S0j9wQAAAABJRU5ErkJggg=="}, {"No.": 32, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Water Tub", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": "800mm x 800mm x 490mm", "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-WATTUB-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nMWVwWkFMQxEn5a9jzrY/svaDsYVTA6bQ35I4FsQoosR6DGSbMkVvto6eLW/96uqi66uqh7wSkgtWcm+/gkl2qqmNK3HNN6I/+4vbnrEnxC6Reiw379KgT6TQPcuT5Iklp5zn5eCA3KkAR9IgjCe8EZYii2N8o+sOMIe8pIIERM+iRNFJJP6CYp4bmKbP8ky5QvW/Ub8T/qRZGCifxAwRgr3SB+EYwkm/VMix1EYvP9n/1B41Tvxv/iRjHpSv5B45m8wPwfEeAmG+3NVcV23QLXP1z//Xx9j24208f+YoAAAAABJRU5ErkJggg=="}, {"No.": 33, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Washing Sink with 3 Water Taps", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": "Stainless Steel", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-WASSIN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1UlEQVR4nMWVQU5EMQxDn0fsnRvM/Y81N3BPYBYfELD7kRDZReprncZNVb7HefAz/j6XNDNoJM2Cd8vJNG5XejQwOYNmW09ec2v973zIZMs35EmH5j6vCgzAAb/u85/otcddnjrgEGqcBQ8NtIXe5h9AZYPGC//QkrS0xBv9sbEp9UI/hcaNXXfF1wZid3W+83X9y/7FdYGN/st/ypgM3PYvBfzRhoX+a/7Y8yQs/PMGMkQgTpbz91CTejM/AcKcGm3879Z1Cbv3dyTE8TPmvn798//1Dnw9f32WNNYoAAAAAElFTkSuQmCC"}, {"No.": 34, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Mirror", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": "1800mm x 900mm", "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-MIRROR-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3UlEQVR4nMWVsW1EMQxDn4LrqQ1u/7H+BvIEL8WlyKXKFxCEjSFANEVBlku+43zwjr+Pq6pPV3dV9YIfpfFMdFVPNVJpqtd+BuZO/o+4WnrFf4C0pyYt9/tXFgSAA7nu879OhNX8dHefSpo+9/2jkxEhmrnPDwZnnMHb/AfkXJznVWzmDw0kmUDu66ODDgMzO/+DJHHjH0eMEOOGH0gwr8sW/tWMRFb6QMyYJKv+aRwnZu7rv/ZPpXPql/lveAAwxbFPu9w/PXnWhZv9i8PkQLJ6v0AYQRb9r3/+vz4BoZOIu44U3VEAAAAASUVORK5CYII="}, {"No.": 35, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Hand Bidet", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": null, "Type": "Metal", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-HANBID-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1UlEQVR4nMWVsW1FMQwDT1ngvEH2H+tvQE/AFL9J0j0BQdQJMEGKlO0p3+t+8LP+vp+Zc+AwM2eBt+XFCbYrPXPg3HuYs53nEz+fnP/d31yyxTc4AM1z/HTAtwjw9RRP21aKbZvn+g9n8Pqa4Xn+NDShRfKcn0YRjNUNviSStm74JRjSZuEflTRG3PjPOz0bVvN/wKUn5xTIIj8IEGGXX9uitWaTHyABhc3+2pKTvEfY5KdKwRU/QMhJ4ub+iKaNdOW/ra0mstmfO8Pc14W7eL/nn/+vL8ivl5PAZZAUAAAAAElFTkSuQmCC"}, {"No.": 36, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Floor Trap", "Equip ID": null, "Quantity": 3, "Location No.": null, "Capacity/rating/type": null, "Type": "Metal", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-FLOTRA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA5klEQVR4nL2Vy2kEQAxDn8PepQ62/7KmA7sC5bCXDSGQMSS+GSw0kj9T4T3mg6/x93lV2bhcVV7gldA1aiX3/A8oYTSmtNXTNH1R/y1P4RX+AcGlgMO9f5UCATCgc48HwLz0X88PkUI3qCP1vX/D9BM0zNn415g4Lw2L+X+SHgZzFvwVzISKYXLNXxmEoU3j6/4R1CggRbn2v8I4Y8EBLfpPkNSAFvwfhPSAFBb+E0B0WoL7+SNKlHQUcv/+1/0Z01O/qf/pfkhNvNEvJAkU9Wb/SHOOYGZ1P6cK6whUq/15j3//vz4Ba4N3C9fBcUkAAAAASUVORK5CYII="}, {"No.": 37, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Shower Head", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": null, "Type": "Stainless Steel", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-SHOHEA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nMWVsW0FMQxDHz+upza4/ce6DegJmOI3+UgTGwiixhAgQqJE0CrfY734jL/PJc0MGklzgHdLIsft0TwaZnUNmlM+GchG/c9czBH+gjJTYMr+/lSBAVjgZx//fufNf1s/1C4hOLWz339hVBke7u35qTG4re1u96e1Q1KanOExee9hH/8C/HAbMt2/PyWhBtwD/hdlOsvwKPv6pYBpgJP9v2gbD3Z5Tvs7jQ37+qNunaYuPbqfBtaspV/Wf8QFgLGDJ4f+I5ZueE78l4YsA/KJ/y2J+34M1j5e//x/fQHjdnXVlj4rsQAAAABJRU5ErkJggg=="}, {"No.": 38, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Toilet", "Trade": "Building and Civil Services", "Equipment Group": "Sanitary Fittings", "Equipment Name": "Water Tap", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": "PVC", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "BUI-WATTAP-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nMWVwWlEQQxDn5e9yx38/sv6HcgVKIeFkM1pxxDi28A85BG2psLPmgfv9ffnquppqquqF7wSLo+sZNVPNVPcUL1+j0Sf3P+uJwAG3Bv+ATECQXzOVwoEwIDucx6gEIbV/DS04J6eWvlX8tCa+UzvN39z9cRN8DlPZJIQYcvnPDISUUSO+QdwBQLjxfwTEWLZjlf6KoNFV2/2F3Q1TCN70X+SEKRo5z/IjiU451/5o6uEWfj/hBKgoqgs83ds4eTc/1f+aK4b9cd6b3zowaUh5/v/8p9Yshb+1z//X19e7HRekLntwwAAAABJRU5ErkJggg=="}, {"No.": 39, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Fan", "Equipment Name": "Oscilating Fan", "Equip ID": null, "Quantity": 4, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-OSCFAN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3klEQVR4nMWVsW0AMQwDT8H31Aa//1i/ATUBU3yTpIoFBFFlASIkngy7wteYD77H3+dV1V1dXVW90Cvh0SMrOe9/QYn2PU1p6ycyPqj/mU8XvdJfEPo20OGcX6VA7xCg51RPksSJ3sO5/26KmemhN/v3YIS46znnR4iwklg6n58IjImCN3oLIiKLDT8mAcFNzvkRJEkgZ+H/IoN6BCqv+DtCBjb8LwJuEF72B4n4ZbDYfyLHUVjdf6qheqbU6/c0kuXf13+dHwmBbJ/7f9+flAbuVX/exUvJgn/98//1CU08gHBxYUK9AAAAAElFTkSuQmCC"}, {"No.": 40, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Fan", "Equipment Name": "Ceiling Fan", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-CEIFAN-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3ElEQVR4nMWVO44EIAxDX0bTOzeY+x+LG5gTeAua/RVDpNVSICzFSuwEqPB57Qdf19/jqurdXV1Vfc0nSgRWlMi3/CeUwKxzmOnR60VfxH/Hy8ZTfox2C+J7fqVAAGzQuuefvU/91/Nz+ifFlsmgf7txU2G9E/8zvyVhhOL7/AQnFmcIB3wRFCJrpB9V6AB+I/4XbKpX7wV74p+kmCTASL/NmV2N/E8SBSkz/wHZsTSp/4ESUAmTkX9IkZjpP3jbIuj+/XwCoNJirx7Vn8gEIY3uDwhZSgb+1z//Xx/344UiAWQDXgAAAABJRU5ErkJggg=="}, {"No.": 41, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Lighting and Power Systems", "Equipment Name": "Lighting", "Equip ID": null, "Quantity": 9, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-LIGHTI-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA00lEQVR4nMWVu41EMQwDR4vLqQ5e/2W5A7oCbuDkDtjEAg7rTMGAon6u8PvtF3/f/8dV1d00VdUDXgkGo+Re/wdK7LV5KI144LnI91O8vfGUj9EGiO/5SoFOEqB17z9A41IYzU/TBVurivv+E0dWEmHHIx5hxZIGPNgKtqSJvgwKjp0JT2LLQhrxMbJiJSP/OZUjmfknECxg0L8XIak8VhjNDyAZJJjoK2G1fSwM+o8kEUb+z/0xuy2a6/09+lE8259zfzb9LPe4/mAc537+6sv/1xu9GZGC73UZHwAAAABJRU5ErkJggg=="}, {"No.": 42, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Lighting and Power Systems", "Equipment Name": "Socket", "Equip ID": null, "Quantity": 20, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-SOCKET-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVQWpEMQxDn4e/l2/w73+s3EA+gbqYgbbMZhIo9SYILGQJm1T4WfPgd/09rqquobqq+oCvhNwjK9nXv6BEoWlKp36cxhv973jRp/yYG8XE+/xKgQAY0NrlkySJo+e7z5dCYuRI2/wHpjyDoNa+f6IgKTHS/vwXqw1UOuUTfYJsIsS+/oOM1i1ByP79EIwSwGf+M4ESo/XRvG/6CGI4zD9Ag/Bh/q8BJDjZPyVEI0x8sn9INj7z/8S6Jevz/u+6AGimtKC37/+C0It74D7Qf+UfS8lB/vXP/9cXcoKAWOQBgaIAAAAASUVORK5CYII="}, {"No.": 43, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Lighting and Power Systems", "Equipment Name": "Emergency Light", "Equip ID": null, "Quantity": 3, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-EMELIG-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2klEQVR4nMWVsW0EQQwDR8blVAfuv6zrgKqAH1xiAx94BRivaBUMSGAlqsLPmi9+1//3VdU1VFdVL3glSB0rWfmpZpppqs/5C4BU5s96b/oK7S0fE0gTn/OVAgEwoPuUJ0linOdx7r+n6ttM0Yv/J6BYTgLn+iRChGjpf9AdjLt65T8oEKyVfyI7Fmz8E4wwJlnpS7FJLNAxfwE9hAL5PH+e+ZORgs71n/wZctPMZn/aNACu9PH+XFACBkqVZf4OEZBNfgKEnnhqmz9gpmWv9hcplpLF/NSH79cLlxiQR+g2zkkAAAAASUVORK5CYII="}, {"No.": 44, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Lighting and Power Systems", "Equipment Name": "Keluar Sign", "Equip ID": null, "Quantity": 3, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-KELSIG-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA40lEQVR4nMWVMW4FQQhDH1+/NzfY+x9rb2BO4BTbJFGKMFIUqkHCgBkPU+GzzYuv9vd+VTVT3VXVB3glFBor2dd/Q4n0fTWlYz4Gb+K/+TWiT/ExVt0m3uMrBQJgQPcWTx7zc/C+/+7uQWp69v0TZNtCJFrXJ/gZoTH7/t9Pgs5c6QP9vWC6Rw1Mn/BPnBgr9gl/IYJETvgTJ7FAPrl/IpCJnmRn+sNB0ZH+qqpzTWh6v3+IEplYkff1Kz0CcAFZ7983AHczoX4R/7Pf1lWjnOxfYnINaOro/YJwwNZev/XP/9cH8CaUqAmJNGoAAAAASUVORK5CYII="}, {"No.": 45, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Lighting and Power Systems", "Equipment Name": "Smart Door", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-SMADOO-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2klEQVR4nL2VwW1DMQxDn4rcqQ3+/mN5A3oC5vBTIOnNAhqdTMCEKJmgK7zX/uGz/h9XVe+iuqp6wFfC5S0rOe//gBKbNpTG81yiT+7/wVnGU34Mat2HU36lQABs0DrlkyQhUZLE5/obWrvX7l3n+kmIsePAeX+CkI2wPNFvvC5ssTj3L3EiREAj/bKTJPJk/0QJ8s0e8ZFNEoFG+oUcw2T/L/8JKXjSH5CJNdJ/5w8pYQb5Q4QUidn8v9hC1rn/HgDs3QtN8o8oUfx6guH+Jev24Xl+fcCv/19PWuuZyeoAde8AAAAASUVORK5CYII="}, {"No.": 46, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Electrical", "Equipment Group": "Lighting and Power Systems", "Equipment Name": "CCTV", "Equip ID": null, "Quantity": 7, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "ELE-CCTV-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2klEQVR4nL2Vu20FMQwEh4bzZQfXf1nXwbKCdaDELxQBm4lEQAP+qQq/Zb74lL/Xq6qh+1zueSV0v0bJyp9qXj8D1ft4Xt29/9Qfmt7yMSZl4nu+UnB8H9B7y5MkieNz3vOSFCWKvOGDLGyk6JqvDPRJwZDr/icYOxDt4g8mjmR0z1doXlBl4FnUT0SJI8PG/oCmQ+PF/iCySGTY2D/9J2NFi/yf/ndpBHCdv7N/0Ajj+/kjQpIj2NT/GwBXBtzb/VOZiCeb/UtMRjOZ2sQPCCnC2szvh/rv/9cPztWWgC4jh3AAAAAASUVORK5CYII="}, {"No.": 47, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Mechanical", "Equipment Group": "Fire Fighting System", "Equipment Name": "Fire Estinguisher", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "MEC-FIREST-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1klEQVR4nMWVMY5DMRBCH1F65v63yw3wCdjiN7tSivyRop2OAmGDB6v8nvPg73wfSxoxg6RZ8N0SJbhdnUeDqzNo7vOfAKidj/XeYI/Iiv+EMgeAct8/VWAADvh1l0/blhS3be7zXYPjQL3gY1JaQjb6Se3Ejb3RL0kgcb3Sb7FJm5V/XFybjf8PCnPwi87cfz9c6dcku/uDbWLY5de2ruvC/fyu/kFHjJNt/yQhzGp/ZVT1yB/pvcOZTEo3+Rm7bkwW/l/9A8MLa9MfgE1Ivdh//fP/9QMKWJiTaiEoSAAAAABJRU5ErkJggg=="}, {"No.": 48, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "All", "Trade": "Mechanical", "Equipment Group": "Air Conditioning", "Equipment Name": "Split Unit", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": "2 HP 18,000 BTU", "Type": null, "Model": null, "Serial No.": null, "Brand": "Midea", "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "MEC-SPLUNI-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1UlEQVR4nMWVMW4FMAhDH1V2c//b5QbOCdwhS9stSF9lSIQUS9iAU+FnnC9+x+fzqmpOV1dVP+OJEoEVJfIrfkEJ0YbSmM8W/fL+T74xHuEXhL71h3f9KgUC4ID2O/6efesfzE9DU+zTp975E0cOjgN57j9BwUZYnuGx5Mj4ff5IHCICGdS/aEgFRGein4Rk2cmA/wJy6AA1mB8igYhhpn+SEKTAu/7Xf3yyaXmkX6KEKIz950hFUZn6b1sket//da/de+Z/l7/vGmS0P7f9w/7VP/9f31O2hOgBMzHgAAAAAElFTkSuQmCC"}, {"No.": 49, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Kitchen", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Dining Table", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-DINTAB-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA40lEQVR4nMWVsY0EMQwDh4fNqQ6u/7K2A6kCfrAX/IUW8HgBDhwQpGhRVvhd8+K7/v4uqVSlklQLvBMy43Zyzn+BTOEp5G0//Tlb/PimVvgLQlU7VDj3TxH4EQG+T/EkSUKcJOnz/qvQeKaGOtdPmm6MbdrH/CQxtNPY5/qJTac7Tvc5/uLGIgpY2cyP1S6DyMY/GjDYWfR/kfINb0B9Pr+E4HbDyv+LEJQxveF/9o8/Adz458SdjuPF/BNjp59X2OQHgLc/Hi72B1CM3KKO8/96EjgGerU/R0K+zXCf4/XP/9cP7ZN+cAZZbCgAAAAASUVORK5CYII="}, {"No.": 50, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Kitchen", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Dining Chair", "Equip ID": null, "Quantity": 6, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-DINCHA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3klEQVR4nL2VQW4FMQhDH1X35gZz/2PNDcwJ3MVIbf8ySP+zClKQDTFOhf8xX7zG+/Oq6iqqq6oX9UpQOlay4lMNwzTV235und3/i28Arkmll/WhbzpNOJ9fpeBhP6D7tJ4kiXGew/n8eqquMEUv3p8EEjsGVvhOD3BFC/082NiJLB3jkxAhQrLjH27hVveKPxY2lrTAJyKWE8ds+peMFEAL/Tz6E0hhNX9AEEv4vP7Xfy4srfa3BD1QVJb+O44IOd+fx3/cTIbZ6EeJkmDZG/1OFcXouln510v68f/rB+rZkmJPEDFOAAAAAElFTkSuQmCC"}, {"No.": 51, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Kitchen", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Kitchen Cabinet", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": "2600mm x 600mm x 800mm", "Type": "Stainless Steel", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-KITCAB-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2klEQVR4nMWVMQ5DMQhDH1V3c4N//2P9GzgncId0aMcgVc0UpFgYA06Fz7MefJ/fx1XVtbq6qnqAVwIiVnKe/wklqKyL0rQeq4/ef+UHrpVKD/GhTacJ5/pVCgTAAt2neJIkjrMv53gZJEyEBnjbEcQyk/yJUBxJI/6REhxjTfgLIxFFI/4kJpaG+oMU8F6iCf94jwGD/j0hRZoC+dx/9vxhpDDQf/uPyE1zT/ZPprkA98A/iJDeGzjQf8ciws7EPwHsXqHXyP9iVpt1GQ/q5+3esn3ev/rz//UC4yGSXDPiQOcAAAAASUVORK5CYII="}, {"No.": 52, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Kitchen", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Refrigerator", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-REFRIG-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA3klEQVR4nL2VwW1DMQxDn4LcqQ3+/mP9DagJ2ENaIOnNAlqfJMCy/ECZrvC+5sHn+vu8qnpququqj+uJEuG8Ai/uU42vUVO95nHjk/2/8qtDr+q/sbF3/JUCATCg+7x/klg/wTl/dze31PRs+IODhKQF/5M2ZQ1iKpv5F4aLnisb/Q3XVYDuPq9/MuiGhmn3Qj8RCQnDuX7EOBLIWuhPFCmOXoft5g8HZdP/5T/RhIat/5hYwef9Kz0CcKE5n78nADc9gdr7j64CnfM/IObWwLB6v4BEIDv/+kj//f/6AhmxiDMiblIgAAAAAElFTkSuQmCC"}, {"No.": 53, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Kitchen", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Gas Stove", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-GASSTO-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVMW6GMQhDH1V3c4P//sfKDcwJ3OEb2qpLg1SVKUg4mABOha82b3y3v/erqunqrqpe4JXQaKxkxacac9RUb+uZA76I/7R3AF6GXuHfIMZTx8T3+EqBABjQucWTJAl+Dr7n392NpKbnnj8B2Q6QaJFf4QXlqMqL/h0wnSnlV/l++OVuGp3l/HkOMyCf+/0hMgqSbO77R6zEAaxF/4ki7Oi5bDd/clA2+R/9sSY0rN4vUYgVvKofSVFAi/of/TjFpF1b/Wr0qtPa6C8x0QBe7i+SA9nsb/3z//UBLx6KtDL96qIAAAAASUVORK5CYII="}, {"No.": 54, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Meeting Table with 6 seaters", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-MEETAB-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nMWVsY1DMQxDnz7SUxtk/7G8AT0BU/ziLqlOBg5RJ0A0KUKgK/yuffFe/99XVVftTVX1AV4JAqHkSE81C9FUn+7zdLcH85/90mz+px4QWr3UhLl/lYKbfYPWHA/Q4PuNKZ4IkxDJlud4SGQj4ozxF6KLxmhr7h+xEyeJYc7/gE4DLOVPej/5YyWWUI78MxZ2iDnBS4odZB3wV6iUgA3p8f1dELIxCuUD/wARI6G5/jt/KIS15vx3/kSwiz7JP4BCy0an+SN4qjnQT5Tovn3nxL9dRZNsdc/115f/rxcn733xNJnvXwAAAABJRU5ErkJggg=="}, {"No.": 55, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Office Table with 2 seaters", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-OFFTAB-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2UlEQVR4nMWVwU2GMQxDnxF3ZwP2H+vfwJ3AHD4k4NhIiFyiSrHiuKmr8jPOG7/j78+SRkIjaRZ4t+Bp3K74aDA5g2Y7z4u5qv+OdwA+gjpLfJnIHcq9fqrAABzw6x7/JJ682J85kpwjZnH/FBJIa2ju9StnqPqMcM//DIUQazb8QyjU6YI/JW0bu+0Kb2wI7Pq7bmnb4IX+KPMqAvd+f2jbEuzi+/4UMDQ2ucd/+U/ng9j3+6POMXAeMmv/rSnd+CdAmFNyVv7XcBLOQFbvF9uxk4X++uf/6xNSh4Hr/TpquAAAAABJRU5ErkJggg=="}, {"No.": 56, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Meeting Chair", "Equip ID": null, "Quantity": 6, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-MEECHA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nL2VsW0FMQxDn4L09Aa3/1i3gTzBS3Ep8pEUsYBElQWIoEjZcsnX2G+8xt/nVbWq1qKq1gAfxdBEz/nfoQJd+6Iy1bMq10n99/ymp3gbWDyHU3xZEAA25D7Fo2qUqPZ5/4tVrJ27ivP5Y2hBA33Ojxq6SSfJMb7cKdkQFn38fjAQpW0G/r0DUumL7S/qf9DfRm3agX6UNgmSTPwnIXQYz09JjPSkfz7vfzLhf/ZP002zJv7nMUDIiP8R0au9r8n+fCL3Veye9K/RpHXg/xu7itr3ZnNN9tdL+u//1wfsfow0pBeh4QAAAABJRU5ErkJggg=="}, {"No.": 57, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Office Chair", "Equip ID": null, "Quantity": 2, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-OFFCHA-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVzW1EQQiDP1bvbjrY/st6HZgKnMPuIYlyyCBF4TIgYWF+5Knw2ebBV/v7uKp6qqurqhd4JbRHVnJe/4ISyLycZT/1pE/yv8WW8RYfA62Xc4qvFAiAAd2neJIkcpQk8Tn/hh76np4650+QTRzHnNcnEbItIm/wtmwchLXBJwKCs+B/8YQbgVqL+38ANNNjeTbzF8ROHLPpX+Z9u7v5JwlCymb+FwVKZZ79m/yf9QeVsBb68dYfVBTjtf5aBJ3r5/V6pu+zep/woccq4T7nTwApluzF/uqf/68PGzuIVyvF9M0AAAAASUVORK5CYII="}, {"No.": 58, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Bamboo Tree", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-BAMTRE-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4UlEQVR4nMWVsW1FMQwDTx/pqQ3e/mN5A3oCpjAQ5AMpYgFBVFnFwZJIyxW+x37xHn+fV1V301RVD3glrI1Rcn//B5RQNg+lEQ807t/W+1O+vfGUj2E353DLVwp0igCtW54kCRFKEt/ziiCWIRrwjhMUxb6/v9LAdssluO7/BXjpYW3AA/+46syfNfAfgVixZA3m/yLaj9EC+v79kUSWhJEm+iMEFjDQ78t/UfC9f87+oXbRE/3O/jE2pif6CQkR0KD/k9tuZz0T/YSUYyBm7zdyJCeD+RNA2NjRPV///H99AqiukmZJOpPlAAAAAElFTkSuQmCC"}, {"No.": 59, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Office", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Flower Pot", "Equip ID": null, "Quantity": 5, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-FLOPOT-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAAz0lEQVR4nMWVMU5FMQwEJ4h+coN3/2O9G2xOsBRfSCBR8Cwh3LkYbey1nVW+xnnje/x9vtbae7NZa+0Bb0vYwfa5/jssOSfnYjnigcvr1+/9Ob/JlG84ZwPNc351gQAc8H5ef4FVlmUwP9SKxEDNc54SYpV0wJeKsakjfa1JYp3pSySVTnhqaDSO+AZrA47qb14tDLP6QZsIQ//alwclI/9AArP5ed2fkhD29P5sTs/yfs5T0TSmDPz7zL2vlZOJfmvVtOP+m5DR/q1//r8+AMz8mMpdFcklAAAAAElFTkSuQmCC"}, {"No.": 60, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Dining Table", "Equip ID": null, "Quantity": 1, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-DINTAB-2026-02", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA30lEQVR4nMWVsY0EMQwDR4fPqQ62/7K2A6oCfrAX/IUWcHhFMmCCokXQFf7WvPis75+rqofprqo+xhMlwnoan+J/oETKV1Pa6hkzJ/c/+IEm2uFfEBPVbeJzfKXg4R7Qff7+SeL43ZzzN2Bo3LeO/VdhgIsBuRfzSxDsCM7nfzHIhag72ezP97RoYPocTywHY2Sf+//RL0vghX7ikARAi/0TCcmP/zf4JIGgbPif/IkmNGzzJ44VfM7/5E8JT6mzzI9MT8q1za9CV7l1rv+dP9cAno1/AcmBbPK7/vn/+gUcrpCKp8gD3gAAAABJRU5ErkJggg=="}, {"No.": 61, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Double Decker Bed", "Equip ID": null, "Quantity": 4, "Location No.": null, "Capacity/rating/type": "900mm x 2000mm x 1800mm", "Type": "Black Bunk", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-DOUDEC-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA30lEQVR4nL2VQW4EMAgDh9XezQ/6/2flB84L3EO2are3ILVcEktxwARIhZ+2H7zb3+Oq6t1UV1UP+Er4oGQl9/6fUILNOpuZnk3oi/O/cWg84j8h9M7XLbf8SoEA2KB1yydJQqIkie/1N7S61+5d9/qJcQwJcO+fgIgsHE/4ii0csDXgxyEQKYP4HxTtzqsABvlTDJajoX6UkBgz0S8LEYNG/k/9IYVB/s/8cWWdBp7NH6mENZgfREiOAAb6X7gthO77/3mW1evK37dFic4DWJP4dxWtLRZrMr/e4L//X5+GUIvM3Dc/jQAAAABJRU5ErkJggg=="}, {"No.": 62, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Mattress", "Equip ID": null, "Quantity": 8, "Location No.": null, "Capacity/rating/type": "4 inch", "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-MATTRE-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4klEQVR4nMWVsY0EMQwDR4fLqQ62/7K2A6oCfnAX/IYy8HgFhg2YIC3TdIXfNS+e9ffrquqaGaqqD/BKoNFnssW/oYQRTen0PH3RXux/8AOmV3wPfGh0qwn7/lUKBMCA7i2eJAnKp7zvX9eUZ+ie2esnga+H5T0/QQZjRHSgn5tAFFw+0K+YIJmT/hFLAQnJe/1vwGVQeVoH/r9uDCrN5b1/K3wNOJBe+6/yHRsXOcivqmp6hkbH+TMI697f/wuqcWCKPuEHaHTbHOcXcKk50E+UyIbYB++HAILEQXt8/fP/9QNKaHj6oAJQiAAAAABJRU5ErkJggg=="}, {"No.": 63, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Pillows", "Equip ID": null, "Quantity": 8, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-PILLOW-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA20lEQVR4nL2Vu21FMQxDj4L01AZv/7G8ATUBU9wmnyYWkKgyAREUoY8rfI5542v8Pa6qru7qquoFXwlhZCX3+u9QovyaprT14za+yP+Ji97yYzqKie/5lQIBMKBzyydJYkfP477+bgpqeuj7/hNBYovYutYnxpISJ7qvnxjFdgTe8OWneRA2/IQQRSgb/wQUeOq435+UTpeA8v38ETDEgHb6kOojvNVHEEus5keJEkfRYv6JkAwGFv4fLEmOf53/HTdTr2E295eYcwRidT+nitYRw9ncry/w3/+vD+jvkI3U/NqzAAAAAElFTkSuQmCC"}, {"No.": 64, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Bedsheet Cover", "Equip ID": null, "Quantity": 8, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-BEDCOV-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA30lEQVR4nMWVQW4EMAgDh9XezQ/6/2flB84L3EMqtXtrkFbLCSQsMCGmwl/bD17t/XFV9a6urqoe4JXQWbKS+/pPKMFuH2fKJ/RV/mscwCP885T+wse5xVcKBMAGrfv+k5gNTuIB/4YmXrt33fMnxrGJgfgeH0C2IJ7gFSc4CtYAT6KEQAb9P1D12gSlB/tPRMByrAH/SsOiw4a+3x8imTiGSX2SJAjN5n/0JyvrfOCZ/qAS1kA/iJAsAQz4n1i2sDXRT4Bdvaz/5//aj/5YJVb7+n4QQJIle/B+9eH79Q22lIztqrowHQAAAABJRU5ErkJggg=="}, {"No.": 65, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Pillow Case", "Equip ID": null, "Quantity": 8, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-PILCAS-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA4ElEQVR4nMWVMW5FIQwEx1/p1zfI/Y/FDdYn2BTvF/kllqK4QCAxWJiRqfA75sVn/P26qnqmuquqr3miRJKeiW/5LyhxGjWl7X1k44v9H/mBxvSKf0GMmWPie75SIAAGdO75N9uBhT+VBvwMRyv/5pQZGm38IYCxZbLwR8iN6HQ272em+QY4fc8TO4kxwvf+P/VnxGQ61/UnDrZAUu7rR6QQR89h93ySiKBs8j/952RCw70/L5TAaPCMN/0LCSmglX8Apiej2vgjJJBIdO/Pu/9oYJhNfkByIJv+Xf/8f/0ASd6HdxgfPAEAAAAASUVORK5CYII="}, {"No.": 66, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Curtain", "Equip ID": null, "Quantity": 4, "Location No.": null, "Capacity/rating/type": null, "Type": null, "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-CURTAI-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA1ElEQVR4nMWVQU4gMQwEy4h75wf8/1n8oOcFxWFAAokDY2m1PiWHTsXu2Bn5HtcLP+Pf72fmzMVhZs5CH8VDiT7nv8IEvHhjstID5/L89b6/7r3oVm9h4F481Y8DAeCCvD/VoyqGqPa5PgYkBbPQtykq0g2/NpS0yYavNKXVPOe/cui5DZjF+0WI2sQs6j8yIFyHwMr/moSyyR9paBvY+aeaxEg3/gGhkGz4X/OnpZyNfyEhCFnx7yR6yvX2fH7e/Ho3wa5/jfk8Y1t/Suui/+Y//18fkHOco+OPqXYAAAAASUVORK5CYII="}, {"No.": 67, "Project Code": "AM-TLQSG-01", "Zone": "Central", "Building": "Show Gallery CLQ", "Block": 1, "Level": 1, "Section/Unit": "Dorm", "Trade": "Furniture", "Equipment Group": "Furniture", "Equipment Name": "Locker", "Equip ID": null, "Quantity": 8, "Location No.": null, "Capacity/rating/type": "420mm x 380mm x 1800mm", "Type": "Metal", "Model": null, "Serial No.": null, "Brand": null, "Year Installed": 2026, "Status": null, "Service Done": null, "REMARK": null, "Asset Tag": "FUR-LOCKER-2026-01", "qrDataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0AQAAAAB84SuKAAAA2ElEQVR4nMWVsW0EMQwEhw/nyw6u/7Kug2UF6+A+8DsTAcOMSEALaZYEVeFnzIvP+Pu6qnp6uquqj/VEieQ8iU/1X1DClJrSlmcwPjj/u75K9FYfY9Vt4nN9pUAADOg+9z9JjN/J+f0NmAb3reP5I1aMBdGi/ySyZBzB+fuJ4gRZ1oL/hYdCMNfd5/0jgWCM7Q2/bAVJ3vFbsQWs+IkMj/u7+5MEB2Xnf1W1NaFhu39CrOAVPxJRQAv+p/bMPA4u90/rqhud87/3TwbwbOYXEASy2d/1z//XN+ZfnBr2K6NOAAAAAElFTkSuQmCC"}];
 
-const STORAGE_KEY = "assetQrAppEditsV1";
+const STORAGE_KEY = "assetQrAppEditsV2";
 let edits = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
 let assets = RAW_ASSETS.map(a => applyEditsToAsset(a));
 let selectedTag = "";
-let stream = null;
-let scanTimer = null;
+let mediaStream = null;
+let scanInterval = null;
+let detector = null;
+let fallbackQrLibLoaded = false;
 
 function safe(v) {
   return (v === null || v === undefined || v === "") ? "-" : String(v);
@@ -175,369 +183,346 @@ function applyEditsToAsset(asset) {
     Status: extra.Status ?? asset.Status ?? "",
     "Service Done": extra["Service Done"] ?? asset["Service Done"] ?? "",
     REMARK: extra.REMARK ?? asset.REMARK ?? "",
-    Condition: extra.Condition ?? "",
-    LastUpdated: extra.LastUpdated ?? ""
+    Condition: extra.Condition ?? asset.Condition ?? "",
+    LastUpdated: extra.LastUpdated ?? asset.LastUpdated ?? ""
   };
 }
 
-function saveEdits() {
+function saveEditsStore() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
   assets = RAW_ASSETS.map(a => applyEditsToAsset(a));
   renderStats();
-  renderFilters();
-  renderList();
-  if (selectedTag) renderDetail(selectedTag);
 }
 
 function renderStats() {
   document.getElementById("statTotal").textContent = assets.length;
-  document.getElementById("statStatus").textContent = assets.filter(a => (a.Status || "").trim()).length;
   document.getElementById("statEdited").textContent = Object.keys(edits).length;
+  document.getElementById("statStatus").textContent = assets.filter(a => (a.Status || "").trim()).length;
   const zoneCount = {};
   assets.forEach(a => {
     const z = (a.Zone || "-").trim() || "-";
     zoneCount[z] = (zoneCount[z] || 0) + 1;
   });
-  const topZone = Object.entries(zoneCount).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById("statZone").textContent = topZone ? topZone[0] : "-";
+  const top = Object.entries(zoneCount).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById("statZone").textContent = top ? top[0] : "-";
 }
 
-function renderFilters() {
-  const zoneSel = document.getElementById("zoneFilter");
-  const currentZone = zoneSel.value;
-  const statusSel = document.getElementById("statusFilter");
-  const currentStatus = statusSel.value;
-
-  const zones = [...new Set(assets.map(a => (a.Zone || "").trim()).filter(Boolean))].sort();
-  zoneSel.innerHTML = '<option value="">All Zones</option>' + zones.map(z => `<option value="${escapeHtml(z)}">${escapeHtml(z)}</option>`).join("");
-
-  const statuses = [...new Set(assets.map(a => (a.Status || "").trim()).filter(Boolean))].sort();
-  statusSel.innerHTML = '<option value="">All Status</option><option value="__blank__">Blank Status</option>' + statuses.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join("");
-
-  zoneSel.value = zones.includes(currentZone) ? currentZone : "";
-  statusSel.value = (currentStatus === "__blank__" || statuses.includes(currentStatus)) ? currentStatus : "";
-}
-
-function getFilteredAssets() {
-  const q = document.getElementById("searchInput").value.trim().toLowerCase();
-  const zone = document.getElementById("zoneFilter").value;
-  const status = document.getElementById("statusFilter").value;
-  return assets.filter(a => {
-    const hay = [
-      a["Asset Tag"], a["Equipment Name"], a["Equipment Group"], a["Trade"], a["Building"],
-      a["Serial No."], a["Brand"], a["Model"], a["Project Code"], a["Location No."], a["Equip ID"]
-    ].map(v => (v || "").toString().toLowerCase()).join(" | ");
-    const okQ = !q || hay.includes(q);
-    const okZone = !zone || ((a.Zone || "").trim() === zone);
-    const aStatus = (a.Status || "").trim();
-    const okStatus = !status || (status === "__blank__" ? !aStatus : aStatus === status);
-    return okQ && okZone && okStatus;
+function fillSearchOptions() {
+  const dl = document.getElementById("assetOptions");
+  dl.innerHTML = "";
+  assets.forEach(a => {
+    const option = document.createElement("option");
+    option.value = a["Asset Tag"];
+    option.label = [a["Asset Tag"], a.Building || "", a.Trade || "", a["Equipment Group"] || ""].filter(Boolean).join(" | ");
+    dl.appendChild(option);
   });
 }
 
-function renderList() {
-  const list = document.getElementById("assetList");
-  const items = getFilteredAssets();
-  if (!items.length) {
-    list.innerHTML = '<div class="empty">No matching asset found.</div>';
-    return;
-  }
-  list.innerHTML = items.map(a => {
-    const title = a["Equipment Name"] || a["Equipment Group"] || a["Trade"] || "Asset";
-    const subtitle = [a["Asset Tag"], a["Building"], a["Level"] ? "Level " + a["Level"] : "", a["Brand"]].filter(Boolean).join(" • ");
-    const status = (a.Status || "").trim();
-    return `
-      <div class="asset-card" data-tag="${escapeHtml(a["Asset Tag"])}">
-        <img src="${a.qrDataUri}" alt="QR">
-        <div>
-          <div class="title">${escapeHtml(title)}</div>
-          <div class="muted">${escapeHtml(subtitle)}</div>
-          <div class="chips">
-            <span class="chip">${escapeHtml(a["Trade"] || "No Trade")}</span>
-            <span class="chip">${escapeHtml((a.Zone || "").trim() || "No Zone")}</span>
-            <span class="chip">${escapeHtml(status || "Status Blank")}</span>
-          </div>
-        </div>
-        <div class="actions">
-          <button onclick="openAsset('${escapeJs(a["Asset Tag"])}')">Open</button>
-          <button class="secondary" onclick="downloadQr('${escapeJs(a["Asset Tag"])}')">QR</button>
-        </div>
-      </div>
-    `;
-  }).join("");
+function searchAsset(term) {
+  const t = (term || "").trim().toLowerCase();
+  if (!t) return null;
+  return assets.find(a => [
+    a["Asset Tag"], a.Building, a.Trade, a["Equipment Group"], a["Equipment Name"], a.Brand, a.Model, a["Serial No."]
+  ].some(v => String(v || "").toLowerCase().includes(t)));
 }
 
 function renderDetail(tag) {
+  const asset = assets.find(a => a["Asset Tag"] === tag);
+  if (!asset) return;
   selectedTag = tag;
-  const a = assets.find(x => x["Asset Tag"] === tag);
-  const box = document.getElementById("detailContent");
-  if (!a) {
-    box.innerHTML = '<div class="empty">Asset not found.</div>';
-    return;
-  }
+  document.getElementById("detailEmpty").classList.add("hidden");
+  document.getElementById("detailArea").classList.remove("hidden");
 
   const fields = [
-    ["Asset Tag", a["Asset Tag"]],
-    ["Project Code", a["Project Code"]],
-    ["Zone", a["Zone"]],
-    ["Building", a["Building"]],
-    ["Block", a["Block"]],
-    ["Level", a["Level"]],
-    ["Section/Unit", a["Section/Unit"]],
-    ["Trade", a["Trade"]],
-    ["Equipment Group", a["Equipment Group"]],
-    ["Equipment Name", a["Equipment Name"]],
-    ["Equip ID", a["Equip ID"]],
-    ["Quantity", a["Quantity"]],
-    ["Location No.", a["Location No."]],
-    ["Capacity/rating/type", a["Capacity/rating/type"]],
-    ["Type", a["Type"]],
-    ["Model", a["Model"]],
-    ["Serial No.", a["Serial No."]],
-    ["Brand", a["Brand"]],
-    ["Year Installed", a["Year Installed"]],
-    ["Status", a["Status"]],
-    ["Service Done", a["Service Done"]],
-    ["Condition (App)", a["Condition"]],
-    ["Remark", a["REMARK"]],
-    ["Last Updated", a["LastUpdated"]]
+    ["Asset Tag", asset["Asset Tag"]],
+    ["Project Code", asset["Project Code"]],
+    ["Zone", asset.Zone],
+    ["Building", asset.Building],
+    ["Block", asset.Block],
+    ["Level", asset.Level],
+    ["Section/Unit", asset["Section/Unit"]],
+    ["Trade", asset.Trade],
+    ["Equipment Group", asset["Equipment Group"]],
+    ["Equipment Name", asset["Equipment Name"]],
+    ["Equip ID", asset["Equip ID"]],
+    ["Quantity", asset.Quantity],
+    ["Location No.", asset["Location No."]],
+    ["Capacity / Rating / Type", asset["Capacity/rating/type"]],
+    ["Type", asset.Type],
+    ["Model", asset.Model],
+    ["Serial No.", asset["Serial No."]],
+    ["Brand", asset.Brand],
+    ["Year Installed", asset["Year Installed"]]
   ];
+  const kv = document.getElementById("detailKv");
+  kv.innerHTML = fields.map(([k,v]) => `<div class="k">${k}</div><div>${safe(v)}</div>`).join("");
 
-  box.innerHTML = `
-    <div class="detail-head">
-      <div>
-        <div class="title" style="font-size:18px;">${escapeHtml(a["Equipment Name"] || a["Equipment Group"] || a["Trade"] || "Asset")}</div>
-        <div class="muted">${escapeHtml(a["Asset Tag"] || "")}</div>
-      </div>
-      <div class="mini ${(a.Status||"").trim() ? "status-good" : "status-empty"}">${escapeHtml((a.Status||"").trim() || "STATUS BLANK")}</div>
-    </div>
-    <div class="detail-qr">
-      <img src="${a.qrDataUri}" alt="QR">
-      <div class="mini" style="margin-top:8px;">Scan this QR using this app's scanner.</div>
-    </div>
-    <div class="detail-grid">
-      ${fields.map(([k,v]) => `
-        <div class="field">
-          <div class="k">${escapeHtml(k)}</div>
-          <div class="v">${escapeHtml(safe(v))}</div>
-        </div>
-      `).join("")}
-    </div>
-
-    <div style="height:12px;"></div>
-    <h2 style="margin-top:8px;">Edit Condition / Status</h2>
-    <div class="form-grid">
-      <div>
-        <label class="mini">Condition</label>
-        <select id="editCondition">
-          <option value="">Select condition</option>
-          ${["Good","Fair","Need Repair","Damaged","Missing","Disposed"].map(v => `<option value="${v}" ${a.Condition===v?"selected":""}>${v}</option>`).join("")}
-        </select>
-      </div>
-      <div>
-        <label class="mini">Status</label>
-        <input id="editStatus" value="${escapeAttr(a.Status || "")}" placeholder="e.g. Active / In Service / Out of Order">
-      </div>
-      <div>
-        <label class="mini">Service Done</label>
-        <input id="editServiceDone" value="${escapeAttr(a["Service Done"] || "")}" placeholder="e.g. Yes / Last service date">
-      </div>
-      <div>
-        <label class="mini">Last Updated</label>
-        <input id="editLastUpdated" value="${escapeAttr(a.LastUpdated || "")}" placeholder="e.g. 18/04/2026 10:30 AM">
-      </div>
-      <div class="full">
-        <label class="mini">Remark</label>
-        <textarea id="editRemark" rows="4" placeholder="Add your observation, defect, or note...">${escapeHtml(a.REMARK || "")}</textarea>
-      </div>
-    </div>
-    <div class="actions">
-      <button onclick="saveAssetEdit('${escapeJs(tag)}')">Save</button>
-      <button class="secondary" onclick="printAssetCard('${escapeJs(tag)}')">Print Card</button>
-      <button class="warn" onclick="resetAssetEdit('${escapeJs(tag)}')">Reset App Edit</button>
-    </div>
-  `;
+  document.getElementById("detailQr").src = asset.qrDataUri;
+  document.getElementById("detailTag").textContent = asset["Asset Tag"];
+  document.getElementById("fieldCondition").value = asset.Condition || "";
+  document.getElementById("fieldStatus").value = asset.Status || "";
+  document.getElementById("fieldServiceDone").value = asset["Service Done"] || "";
+  document.getElementById("fieldRemark").value = asset.REMARK || "";
+  document.getElementById("fieldLastUpdated").value = asset.LastUpdated || "";
+  document.getElementById("assetSearch").value = asset["Asset Tag"];
 }
 
-function saveAssetEdit(tag) {
-  edits[tag] = {
-    Condition: document.getElementById("editCondition").value,
-    Status: document.getElementById("editStatus").value.trim(),
-    "Service Done": document.getElementById("editServiceDone").value.trim(),
-    LastUpdated: document.getElementById("editLastUpdated").value.trim(),
-    REMARK: document.getElementById("editRemark").value.trim()
+function saveSelectedAsset() {
+  if (!selectedTag) {
+    alert("Open an asset first.");
+    return;
+  }
+  edits[selectedTag] = {
+    Condition: document.getElementById("fieldCondition").value || "",
+    Status: document.getElementById("fieldStatus").value || "",
+    "Service Done": document.getElementById("fieldServiceDone").value || "",
+    REMARK: document.getElementById("fieldRemark").value || "",
+    LastUpdated: document.getElementById("fieldLastUpdated").value || new Date().toLocaleString()
   };
-  saveEdits();
+  if (!document.getElementById("fieldLastUpdated").value) {
+    document.getElementById("fieldLastUpdated").value = edits[selectedTag].LastUpdated;
+  } else {
+    edits[selectedTag].LastUpdated = document.getElementById("fieldLastUpdated").value;
+  }
+  saveEditsStore();
+  renderDetail(selectedTag);
   alert("Asset update saved in this browser.");
 }
 
-function resetAssetEdit(tag) {
-  delete edits[tag];
-  saveEdits();
-  openAsset(tag);
-}
-
-function openAsset(tag) {
-  renderDetail(tag);
-  history.replaceState(null, "", "#asset=" + encodeURIComponent(tag));
-}
-
-function downloadQr(tag) {
-  const a = assets.find(x => x["Asset Tag"] === tag);
-  if (!a) return;
-  const link = document.createElement("a");
-  link.href = a.qrDataUri;
-  link.download = tag.replace(/[^a-z0-9_-]/gi, "_") + ".png";
-  link.click();
-}
-
-function exportEdits() {
-  const rows = [["Asset Tag","Condition","Status","Service Done","Remark","Last Updated"]];
-  Object.keys(edits).sort().forEach(tag => {
-    const e = edits[tag];
-    rows.push([tag, e.Condition || "", e.Status || "", e["Service Done"] || "", e.REMARK || "", e.LastUpdated || ""]);
-  });
-  const csv = rows.map(r => r.map(csvCell).join(",")).join("\n");
+function exportCsv() {
+  const rows = assets.map(a => ({
+    "Asset Tag": a["Asset Tag"],
+    "Project Code": a["Project Code"],
+    "Zone": a.Zone,
+    "Building": a.Building,
+    "Block": a.Block,
+    "Level": a.Level,
+    "Trade": a.Trade,
+    "Equipment Group": a["Equipment Group"],
+    "Brand": a.Brand,
+    "Model": a.Model,
+    "Condition": a.Condition || "",
+    "Status": a.Status || "",
+    "Service Done": a["Service Done"] || "",
+    "Remark": a.REMARK || "",
+    "Last Updated": a.LastUpdated || ""
+  }));
+  const headers = Object.keys(rows[0] || {});
+  const csv = [headers.join(",")].concat(rows.map(r => headers.map(h => {
+    const value = String(r[h] ?? "");
+    return /[",\n]/.test(value) ? '"' + value.replace(/"/g,'""') + '"' : value;
+  }).join(","))).join("\n");
   const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "asset_app_edits.csv";
-  link.click();
-  URL.revokeObjectURL(link.href);
+  downloadBlob(blob, "asset_edit_export.csv");
 }
 
-function csvCell(v) {
-  const s = (v ?? "").toString().replace(/"/g, '""');
-  return `"${s}"`;
-}
-
-function printAssetCard(tag) {
-  const a = assets.find(x => x["Asset Tag"] === tag);
-  if (!a) return;
-  const w = window.open("", "_blank");
-  w.document.write(`
-    <html><head><title>${escapeHtml(tag)}</title>
-    <style>
-      body { font-family: Arial; padding:20px; }
-      .card { border:1px solid #ccc; border-radius:16px; padding:20px; max-width:420px; }
-      img { width:220px; }
-      .t { font-weight:700; font-size:18px; margin-bottom:8px; }
-      .m { color:#555; margin-bottom:6px; }
-    </style></head><body>
-      <div class="card">
-        <div class="t">${escapeHtml(a["Equipment Name"] || a["Equipment Group"] || "Asset")}</div>
-        <div class="m"><b>Asset Tag:</b> ${escapeHtml(a["Asset Tag"])}</div>
-        <div class="m"><b>Building:</b> ${escapeHtml(safe(a["Building"]))}</div>
-        <div class="m"><b>Location:</b> ${escapeHtml([a["Block"], a["Level"], a["Section/Unit"]].filter(Boolean).join(" / ") || "-")}</div>
-        <div class="m"><b>Status:</b> ${escapeHtml(a["Status"] || "-")}</div>
-        <div style="margin-top:12px;"><img src="${a.qrDataUri}" /></div>
-      </div>
-    </body></html>
-  `);
-  w.document.close();
-  w.focus();
-  w.print();
-}
-
-function escapeHtml(s) {
-  return (s ?? "").toString()
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#39;");
-}
-function escapeAttr(s) { return escapeHtml(s).replace(/`/g, "&#96;"); }
-function escapeJs(s) { return (s ?? "").toString().replace(/\\/g,"\\\\").replace(/'/g,"\\'"); }
-
-async function startScanner() {
-  if (!('mediaDevices' in navigator) || !navigator.mediaDevices.getUserMedia) {
-    alert("Camera API not supported in this browser.");
-    return;
-  }
-  if (!('BarcodeDetector' in window)) {
-    alert("QR scan needs a browser with BarcodeDetector support, such as newer Chrome/Edge on Android. You can still search asset manually.");
-    return;
-  }
+async function exportQrExcel() {
   try {
-    stream = await navigator.mediaDevices.getUserMedia({
+    const wb = new ExcelJS.Workbook();
+    wb.creator = "OpenAI";
+    wb.created = new Date();
+
+    const ws = wb.addWorksheet("QR Labels", {
+      pageSetup: { paperSize: 9, orientation: "portrait", fitToPage: true, fitToWidth: 1, fitToHeight: 0 },
+      properties: { defaultRowHeight: 72 }
+    });
+
+    ws.columns = [
+      { header: "No.", key: "no", width: 8 },
+      { header: "Asset Tag", key: "tag", width: 24 },
+      { header: "Building", key: "building", width: 28 },
+      { header: "Trade", key: "trade", width: 26 },
+      { header: "Condition", key: "condition", width: 16 },
+      { header: "Status", key: "status", width: 18 },
+      { header: "QR", key: "qr", width: 16 }
+    ];
+
+    const headerRow = ws.getRow(1);
+    headerRow.font = { bold: true, color: {argb:"FFFFFFFF"} };
+    headerRow.fill = { type: "pattern", pattern: "solid", fgColor: {argb:"0F4C81"} };
+    headerRow.alignment = { vertical: "middle", horizontal: "center" };
+    headerRow.height = 24;
+
+    assets.forEach((a, i) => {
+      ws.addRow({
+        no: a["No."],
+        tag: a["Asset Tag"],
+        building: a.Building || "",
+        trade: a.Trade || "",
+        condition: a.Condition || "",
+        status: a.Status || "",
+        qr: ""
+      });
+    });
+
+    for (let i = 0; i < assets.length; i++) {
+      const rowNumber = i + 2;
+      const asset = assets[i];
+      const imgId = wb.addImage({
+        base64: asset.qrDataUri,
+        extension: "png"
+      });
+      ws.addImage(imgId, {
+        tl: { col: 6 + 0.15, row: rowNumber - 1 + 0.12 },
+        ext: { width: 68, height: 68 }
+      });
+      ws.getRow(rowNumber).height = 56;
+      ws.getCell(`A${rowNumber}`).alignment = { vertical:"middle", horizontal:"center" };
+      ["B","C","D","E","F"].forEach(col => {
+        ws.getCell(`${col}${rowNumber}`).alignment = { vertical:"middle", wrapText:true };
+      });
+    }
+
+    ws.views = [{state:"frozen", ySplit:1}];
+    ws.autoFilter = "A1:G1";
+
+    const dataWs = wb.addWorksheet("Asset Data", {
+      views:[{state:"frozen", ySplit:1}]
+    });
+    const keys = Object.keys(assets[0] || {}).filter(k => k !== "qrDataUri");
+    dataWs.addRow(keys);
+    const hdr = dataWs.getRow(1);
+    hdr.font = { bold: true, color: {argb:"FFFFFFFF"} };
+    hdr.fill = { type: "pattern", pattern: "solid", fgColor: {argb:"1F7BB6"} };
+    assets.forEach(a => dataWs.addRow(keys.map(k => a[k] ?? "")));
+    keys.forEach((k, idx) => {
+      const col = dataWs.getColumn(idx+1);
+      col.width = Math.min(Math.max(String(k).length + 4, 14), 28);
+    });
+
+    const buffer = await wb.xlsx.writeBuffer();
+    downloadBlob(new Blob([buffer], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}), "asset_qr_labels.xlsx");
+  } catch (err) {
+    console.error(err);
+    alert("Excel export failed. Check internet connection because ExcelJS is loaded from CDN.");
+  }
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+}
+
+async function ensureQrFallbackLib() {
+  if (fallbackQrLibLoaded || window.jsQR) return;
+  await new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+    s.onload = () => { fallbackQrLibLoaded = true; resolve(); };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function startScan() {
+  const video = document.getElementById("video");
+  const note = document.getElementById("scanNote");
+  try {
+    stopScan();
+    mediaStream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: { ideal: "environment" } },
       audio: false
     });
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("scanCanvas");
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    video.srcObject = stream;
-    video.classList.remove("hidden");
+    video.srcObject = mediaStream;
     await video.play();
+    note.textContent = "Camera started. Point to the QR label.";
 
-    const detector = new BarcodeDetector({ formats: ["qr_code"] });
-    scanTimer = setInterval(async () => {
-      if (video.readyState < 2) return;
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      try {
-        const codes = await detector.detect(canvas);
-        if (codes && codes.length) {
-          const raw = codes[0].rawValue || "";
-          handleScannedValue(raw);
+    if ('BarcodeDetector' in window) {
+      detector = new BarcodeDetector({ formats: ['qr_code'] });
+      scanInterval = setInterval(async () => {
+        try {
+          const codes = await detector.detect(video);
+          if (codes && codes.length) {
+            handleScanValue(codes[0].rawValue || "");
+          }
+        } catch(e) {}
+      }, 500);
+    } else {
+      await ensureQrFallbackLib();
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      scanInterval = setInterval(() => {
+        if (!video.videoWidth) return;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = window.jsQR(imageData.data, imageData.width, imageData.height);
+        if (code && code.data) {
+          handleScanValue(code.data);
         }
-      } catch (err) {
-        console.error(err);
-      }
-    }, 700);
+      }, 700);
+    }
   } catch (err) {
-    alert("Unable to start camera. Check browser permission and run from HTTPS or localhost.\n\n" + err.message);
+    console.error(err);
+    note.textContent = "Camera failed. Open this app using HTTPS or localhost and allow camera permission.";
+    alert("Unable to access camera. Allow camera permission and open the page via HTTPS or localhost.");
   }
 }
 
-function stopScanner() {
-  if (scanTimer) clearInterval(scanTimer);
-  scanTimer = null;
+function stopScan() {
+  if (scanInterval) {
+    clearInterval(scanInterval);
+    scanInterval = null;
+  }
+  if (mediaStream) {
+    mediaStream.getTracks().forEach(t => t.stop());
+    mediaStream = null;
+  }
   const video = document.getElementById("video");
-  if (stream) {
-    stream.getTracks().forEach(t => t.stop());
-    stream = null;
-  }
-  video.pause();
-  video.srcObject = null;
-  video.classList.add("hidden");
+  if (video) video.srcObject = null;
 }
 
-function handleScannedValue(raw) {
-  document.getElementById("scanResultNote").textContent = "Scanned: " + raw;
-  let tag = raw;
-  if (raw.startsWith("ASSET:")) tag = raw.slice(6);
-  const match = assets.find(a => a["Asset Tag"] === tag);
-  if (match) {
-    stopScanner();
-    openAsset(tag);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+function handleScanValue(raw) {
+  if (!raw) return;
+  const cleaned = String(raw).trim();
+  const asset = assets.find(a => a["Asset Tag"] === cleaned);
+  document.getElementById("scanNote").textContent = "Scanned: " + cleaned;
+  if (asset) {
+    renderDetail(asset["Asset Tag"]);
+    stopScan();
   }
 }
 
-function initFromHash() {
-  const hash = location.hash || "";
-  const m = hash.match(/asset=([^&]+)/);
-  if (m) {
-    const tag = decodeURIComponent(m[1]);
-    if (assets.some(a => a["Asset Tag"] === tag)) renderDetail(tag);
+document.getElementById("openAssetBtn").addEventListener("click", () => {
+  const value = document.getElementById("assetSearch").value;
+  const asset = searchAsset(value);
+  if (!asset) {
+    alert("Asset not found.");
+    return;
   }
-}
+  renderDetail(asset["Asset Tag"]);
+});
 
-document.getElementById("searchInput").addEventListener("input", renderList);
-document.getElementById("zoneFilter").addEventListener("change", renderList);
-document.getElementById("statusFilter").addEventListener("change", renderList);
-document.getElementById("btnExport").addEventListener("click", exportEdits);
-document.getElementById("startScanBtn").addEventListener("click", startScanner);
-document.getElementById("stopScanBtn").addEventListener("click", stopScanner);
-window.addEventListener("hashchange", initFromHash);
+document.getElementById("assetSearch").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("openAssetBtn").click();
+  }
+});
+
+document.getElementById("saveAssetBtn").addEventListener("click", saveSelectedAsset);
+document.getElementById("startScanBtn").addEventListener("click", startScan);
+document.getElementById("stopScanBtn").addEventListener("click", stopScan);
+document.getElementById("exportCsvBtn").addEventListener("click", exportCsv);
+document.getElementById("exportExcelBtn").addEventListener("click", exportQrExcel);
+document.getElementById("clearEditsBtn").addEventListener("click", () => {
+  if (!confirm("Clear all saved edits in this browser?")) return;
+  edits = {};
+  localStorage.removeItem(STORAGE_KEY);
+  assets = RAW_ASSETS.map(a => applyEditsToAsset(a));
+  renderStats();
+  if (selectedTag) renderDetail(selectedTag);
+});
 
 renderStats();
-renderFilters();
-renderList();
-initFromHash();
+fillSearchOptions();
 </script>
 </body>
 </html>
