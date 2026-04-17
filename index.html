@@ -431,7 +431,7 @@ async function startScan() {
     });
     video.srcObject = mediaStream;
     await video.play();
-    note.textContent = "Camera started. Point to the QR label.";
+    note.textContent = "Camera started. Point to the QR label. Scanner will stop automatically when asset is found.";
 
     if ('BarcodeDetector' in window) {
       detector = new BarcodeDetector({ formats: ['qr_code'] });
@@ -466,7 +466,7 @@ async function startScan() {
   }
 }
 
-function stopScan() {
+function stopScan(updateNote = true) {
   if (scanInterval) {
     clearInterval(scanInterval);
     scanInterval = null;
@@ -477,16 +477,52 @@ function stopScan() {
   }
   const video = document.getElementById("video");
   if (video) video.srcObject = null;
+  if (updateNote) {
+    document.getElementById("scanNote").textContent = "Scanner stopped.";
+  }
+}
+
+function extractAssetTag(raw) {
+  const cleaned = String(raw || "").trim();
+  if (!cleaned) return "";
+
+  const direct = assets.find(a => String(a["Asset Tag"] || "").trim().toLowerCase() === cleaned.toLowerCase());
+  if (direct) return direct["Asset Tag"];
+
+  try {
+    const url = new URL(cleaned);
+    const possible = [
+      url.searchParams.get("asset"),
+      url.searchParams.get("tag"),
+      url.searchParams.get("assetTag"),
+      url.hash ? url.hash.replace(/^#/, "") : ""
+    ].filter(Boolean);
+    for (const value of possible) {
+      const found = assets.find(a => String(a["Asset Tag"] || "").trim().toLowerCase() === String(value).trim().toLowerCase());
+      if (found) return found["Asset Tag"];
+    }
+  } catch (e) {}
+
+  const upper = cleaned.toUpperCase();
+  const tags = assets.map(a => a["Asset Tag"]).filter(Boolean).sort((a,b)=>String(b).length-String(a).length);
+  const embedded = tags.find(tag => upper.includes(String(tag).toUpperCase()));
+  if (embedded) return embedded;
+
+  const partial = searchAsset(cleaned);
+  return partial ? partial["Asset Tag"] : "";
 }
 
 function handleScanValue(raw) {
   if (!raw) return;
   const cleaned = String(raw).trim();
-  const asset = assets.find(a => a["Asset Tag"] === cleaned);
-  document.getElementById("scanNote").textContent = "Scanned: " + cleaned;
-  if (asset) {
-    renderDetail(asset["Asset Tag"]);
-    stopScan();
+  const matchedTag = extractAssetTag(cleaned);
+  if (matchedTag) {
+    stopScan(false);
+    renderDetail(matchedTag);
+    document.getElementById("scanNote").textContent = "Asset found: " + matchedTag;
+    document.getElementById("detailArea").scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    document.getElementById("scanNote").textContent = "Scanned, but no matching asset found: " + cleaned;
   }
 }
 
@@ -509,7 +545,7 @@ document.getElementById("assetSearch").addEventListener("keydown", (e) => {
 
 document.getElementById("saveAssetBtn").addEventListener("click", saveSelectedAsset);
 document.getElementById("startScanBtn").addEventListener("click", startScan);
-document.getElementById("stopScanBtn").addEventListener("click", stopScan);
+document.getElementById("stopScanBtn").addEventListener("click", () => stopScan(true));
 document.getElementById("exportCsvBtn").addEventListener("click", exportCsv);
 document.getElementById("exportExcelBtn").addEventListener("click", exportQrExcel);
 document.getElementById("clearEditsBtn").addEventListener("click", () => {
