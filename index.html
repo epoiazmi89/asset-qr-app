@@ -56,6 +56,11 @@
     .edit-grid { grid-template-columns:1fr; }
     .kv { grid-template-columns:1fr; gap:0; }
   }
+
+  .history-table { width:100%; border-collapse:collapse; margin-top:12px; }
+  .history-table th, .history-table td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; font-size:13px; }
+  .history-table th { background:#eef4fb; }
+  .history-wrap { overflow:auto; }
 </style>
 </head>
 <body>
@@ -176,8 +181,18 @@ function safe(v) {
   return (v === null || v === undefined || v === "") ? "-" : String(v);
 }
 
+function getAssetHistory(tag) {
+  return Array.isArray(historyStore[tag]) ? historyStore[tag] : [];
+}
+
+function getLatestHistory(tag) {
+  const rows = getAssetHistory(tag);
+  return rows.length ? rows[rows.length - 1] : null;
+}
+
 function applyEditsToAsset(asset) {
-  const extra = edits[asset["Asset Tag"]] || {};
+  const latest = getLatestHistory(asset["Asset Tag"]);
+  const extra = latest || edits[asset["Asset Tag"]] || {};
   return {
     ...asset,
     Status: extra.Status ?? asset.Status ?? "",
@@ -190,8 +205,34 @@ function applyEditsToAsset(asset) {
 
 function saveEditsStore() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(historyStore));
   assets = RAW_ASSETS.map(a => applyEditsToAsset(a));
   renderStats();
+  fillSearchOptions();
+}
+
+function renderAssetHistory(tag) {
+  const rows = getAssetHistory(tag).slice().reverse();
+  const empty = document.getElementById("historyEmpty");
+  const area = document.getElementById("historyArea");
+  const body = document.getElementById("historyTableBody");
+  if (!rows.length) {
+    empty.classList.remove("hidden");
+    area.classList.add("hidden");
+    body.innerHTML = "";
+    return;
+  }
+  empty.classList.add("hidden");
+  area.classList.remove("hidden");
+  body.innerHTML = rows.map(r => `
+    <tr>
+      <td>${safe(r.LastUpdated)}</td>
+      <td>${safe(r.Condition)}</td>
+      <td>${safe(r.Status)}</td>
+      <td>${safe(r["Service Done"])}</td>
+      <td>${safe(r.REMARK)}</td>
+    </tr>
+  `).join("");
 }
 
 function renderStats() {
@@ -263,8 +304,9 @@ function renderDetail(tag) {
   document.getElementById("fieldStatus").value = asset.Status || "";
   document.getElementById("fieldServiceDone").value = asset["Service Done"] || "";
   document.getElementById("fieldRemark").value = asset.REMARK || "";
-  document.getElementById("fieldLastUpdated").value = asset.LastUpdated || "";
+  document.getElementById("fieldLastUpdated").value = "";
   document.getElementById("assetSearch").value = asset["Asset Tag"];
+  renderAssetHistory(tag);
 }
 
 function saveSelectedAsset() {
@@ -272,21 +314,19 @@ function saveSelectedAsset() {
     alert("Open an asset first.");
     return;
   }
-  edits[selectedTag] = {
+  const entry = {
     Condition: document.getElementById("fieldCondition").value || "",
     Status: document.getElementById("fieldStatus").value || "",
     "Service Done": document.getElementById("fieldServiceDone").value || "",
     REMARK: document.getElementById("fieldRemark").value || "",
     LastUpdated: document.getElementById("fieldLastUpdated").value || new Date().toLocaleString()
   };
-  if (!document.getElementById("fieldLastUpdated").value) {
-    document.getElementById("fieldLastUpdated").value = edits[selectedTag].LastUpdated;
-  } else {
-    edits[selectedTag].LastUpdated = document.getElementById("fieldLastUpdated").value;
-  }
+  if (!historyStore[selectedTag]) historyStore[selectedTag] = [];
+  historyStore[selectedTag].push(entry);
+  edits[selectedTag] = entry;
   saveEditsStore();
   renderDetail(selectedTag);
-  alert("Asset update saved in this browser.");
+  alert("New condition report saved into history for this asset.");
 }
 
 function exportCsv() {
@@ -305,7 +345,8 @@ function exportCsv() {
     "Status": a.Status || "",
     "Service Done": a["Service Done"] || "",
     "Remark": a.REMARK || "",
-    "Last Updated": a.LastUpdated || ""
+    "Last Updated": a.LastUpdated || "",
+    "History Count": getAssetHistory(a["Asset Tag"]).length
   }));
   const headers = Object.keys(rows[0] || {});
   const csv = [headers.join(",")].concat(rows.map(r => headers.map(h => {
@@ -388,6 +429,31 @@ async function exportQrExcel() {
     keys.forEach((k, idx) => {
       const col = dataWs.getColumn(idx+1);
       col.width = Math.min(Math.max(String(k).length + 4, 14), 28);
+    });
+
+    const historyWs = wb.addWorksheet("Condition History", {
+      views:[{state:"frozen", ySplit:1}]
+    });
+    const historyHeaders = ["Asset Tag","Last Updated","Condition","Status","Service Done","Remark"];
+    historyWs.addRow(historyHeaders);
+    const hh = historyWs.getRow(1);
+    hh.font = { bold: true, color: {argb:"FFFFFFFF"} };
+    hh.fill = { type: "pattern", pattern: "solid", fgColor: {argb:"0B7A35"} };
+    assets.forEach(a => {
+      const rows = getAssetHistory(a["Asset Tag"]);
+      if (!rows.length) return;
+      rows.forEach(r => historyWs.addRow([
+        a["Asset Tag"],
+        r.LastUpdated || "",
+        r.Condition || "",
+        r.Status || "",
+        r["Service Done"] || "",
+        r.REMARK || ""
+      ]));
+    });
+    historyHeaders.forEach((k, idx) => {
+      const col = historyWs.getColumn(idx+1);
+      col.width = [24,20,16,18,18,40][idx];
     });
 
     const buffer = await wb.xlsx.writeBuffer();
@@ -549,11 +615,15 @@ document.getElementById("stopScanBtn").addEventListener("click", () => stopScan(
 document.getElementById("exportCsvBtn").addEventListener("click", exportCsv);
 document.getElementById("exportExcelBtn").addEventListener("click", exportQrExcel);
 document.getElementById("clearEditsBtn").addEventListener("click", () => {
-  if (!confirm("Clear all saved edits in this browser?")) return;
+  if (!confirm("Clear all saved edits and history in this browser?")) return;
   edits = {};
+  historyStore = {};
   localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(LEGACY_STORAGE_KEY);
+  localStorage.removeItem(HISTORY_KEY);
   assets = RAW_ASSETS.map(a => applyEditsToAsset(a));
   renderStats();
+  fillSearchOptions();
   if (selectedTag) renderDetail(selectedTag);
 });
 
